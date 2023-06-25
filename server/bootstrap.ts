@@ -1,5 +1,54 @@
 import { Strapi } from "@strapi/strapi";
-import qs from "qs";
+import _ from "lodash";
+
+type Location = { lat?: string; lng?: string; range?: string } | string;
+type LocationQuery = {
+  [key: string]: Location;
+};
+type LogicalQuery =
+  | { $or: LocationQuery[]; $and?: never }
+  | { $and: LocationQuery[]; $or?: never };
+type LocationQueryCombined = LocationQuery | LogicalQuery;
+
+const getLocationFromString = (location: string) => {
+  const [latStr, lngStr, rangeStr] = location.split(",");
+  return [
+    parseFloat(latStr),
+    parseFloat(lngStr),
+    rangeStr ? parseFloat(rangeStr) : 0,
+  ];
+};
+
+const getLocationQueryParams = (
+  model,
+  fieldToFilter,
+  locationQuery
+): [number | null, number | null, number] | null => {
+  if (
+    model?.attributes?.[fieldToFilter]?.customField !==
+    "plugin::location-plugin.location"
+  ) {
+    return null;
+  }
+  let range = 0,
+    lat: number | null = null,
+    lng: number | null = null;
+  if (typeof locationQuery[fieldToFilter] === "string") {
+    [lat, lng, range] = getLocationFromString(locationQuery[fieldToFilter]);
+  } else {
+    if (locationQuery[fieldToFilter]?.range) {
+      range = parseInt(locationQuery[fieldToFilter].range);
+    }
+    if (locationQuery[fieldToFilter]?.lat) {
+      lat = parseFloat(locationQuery[fieldToFilter].lat);
+    }
+    if (locationQuery[fieldToFilter]?.lng) {
+      lng = parseFloat(locationQuery[fieldToFilter].lng);
+    }
+  }
+
+  return [lat, lng, range];
+};
 
 export default async ({ strapi }: { strapi: Strapi }) => {
   const db = strapi.db.connection;
@@ -67,7 +116,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           if (!data?.lng || !data?.lat) return;
 
           await db.raw(`
-            UPDATE ${model.tableName} 
+            UPDATE ${model.tableName}
             SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(${data.lng}, ${data.lat}), 4326)
             WHERE id = ${id};
         `);
@@ -86,7 +135,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           if (!params.where.id || !data?.lng || !data?.lat) return;
 
           await db.raw(`
-            UPDATE ${model.tableName} 
+            UPDATE ${model.tableName}
             SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(${data.lng}, ${data.lat}), 4326)
             WHERE id = ${params.where.id};
           `);
@@ -110,39 +159,113 @@ export default async ({ strapi }: { strapi: Strapi }) => {
       return next();
     }
 
-    const query = qs.parse(queryString);
-    if (!query.$location) {
+    if (!ctx.query.$location) {
       return next();
     }
-    let range = 0,
-      lat: number | null = null,
-      lng: number | null = null;
+    if (typeof ctx.query.$location === "string") {
+      // TODO: logic warning here this is not valid query
+      return next();
+    }
 
     // TODO: change this so that it can handle multiple location fields
-    const location = query.$location as
-      | { lat?: string; lng?: string; range?: string }
-      | string;
-
-    if (typeof location === "string") {
-      const [latStr, lngStr, rangeStr] = location.split(",");
-      lat = parseFloat(latStr);
-      lng = parseFloat(lngStr);
-      range = parseFloat(rangeStr);
-    } else {
-      if (location.range) {
-        range = parseInt(location.range);
-      }
-      if (location.lat) {
-        lat = parseFloat(location.lat);
-      }
-      if (location.lng) {
-        lng = parseFloat(location.lng);
-      }
+    const locationQuery = ctx.query.$location as LocationQueryCombined;
+    ctx.query = _.omit(ctx.query, ["$location"]);
+    const fieldsToFilter = Object.keys(locationQuery);
+    if (fieldsToFilter.length > 1) {
+      // TODO: $and or $or logic warning here this is not valid query
+      return next();
     }
-    if (!lat || !lng) return next();
+    const fieldToFilter = fieldsToFilter[0];
+    if (fieldToFilter !== "$or" && fieldToFilter !== "$and") {
+      const locationQueryParams = getLocationQueryParams(
+        model,
+        fieldToFilter,
+        locationQuery
+      );
+      if (!locationQueryParams) {
+        // TODO: add warning that location query is not valid
+        return next();
+      }
+      const [lat, lng, range] = locationQueryParams;
+      const ids = (
+        await db(model.tableName)
+          .select("id")
+          .whereRaw(
+            `
+          ST_DWithin(
+          ${fieldToFilter}_geom,
+          ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
+            [lng, lat, range ?? 0]
+          )
+      ).map((item) => item.id);
 
-    // TODO: Add logic to filter by location
-    console.log(range, lat, lng);
+      ctx.query = {
+        ...ctx.query,
+        filters: {
+          ...ctx?.query?.filters,
+          id: {
+            $in: ids.length ? ids : [0],
+          },
+        },
+      };
+      return next();
+    }
+
+    if (!Array.isArray(locationQuery[fieldToFilter])) {
+      // TODO: add warning that $and and $or must be an array
+      return next();
+    }
+
+    const query = locationQuery[fieldToFilter] as LogicalQuery["$or" | "$and"];
+
+    const logicalOperators = { $or: "OR", $and: "AND" };
+    const dbQuery = query
+      ?.map((item) => {
+        const logicalFieldsToFilter = Object.keys(item);
+
+        const filters = logicalFieldsToFilter
+          .map((field) => {
+            const locationQueryParams = getLocationQueryParams(
+              model,
+              field,
+              item
+            );
+            if (!!locationQueryParams) {
+              const [lat, lng, range] = locationQueryParams;
+              return `ST_DWithin(${field}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${
+                range ?? 0
+              })`;
+            } else {
+              return false;
+            }
+          })
+          .filter(Boolean);
+        return filters;
+      })
+      .flat();
+
+    if (!dbQuery || dbQuery?.length === 0) {
+      // TODO: add warning that location query is not valid
+      return next();
+    }
+
+    const wholeQuery = dbQuery.map((item, index) =>
+      index === 0 ? `(${item})` : `${logicalOperators[fieldToFilter]} ${item}`
+    );
+    const ids = (
+      await db(model.tableName).select("id").whereRaw(wholeQuery.join(" "))
+    ).map((item) => item.id);
+
+    ctx.query = {
+      ...ctx.query,
+      filters: {
+        ...ctx?.query?.filters,
+        id: {
+          $in: ids.length ? ids : [0],
+        },
+      },
+    };
+
     await next();
   });
 };
