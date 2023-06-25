@@ -1,7 +1,6 @@
 import { Strapi } from "@strapi/strapi";
 import createSubscriber from "./utils/lifecycles";
 import _ from "lodash";
-import { getLocationQueryParams } from "./utils/locationHelpers";
 import createFilterMiddleware from "./utils/middleware";
 
 const locaitonServiceUid = "plugin::location-plugin.locationServices";
