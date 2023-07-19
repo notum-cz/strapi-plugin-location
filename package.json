@@ -1,6 +1,6 @@
 {
   "name": "@notum-cz/strapi-plugin-location",
-  "version": "1.0.1--prerelease2",
+  "version": "1.0.1",
   "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
   "license": "SEE LICENSE IN LICENSE",
   "strapi": {
@@ -28,11 +28,7 @@
     "typescript": "5.0.4"
   },
   "peerDependencies": {
-    "@strapi/strapi": "4.x",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0",
-    "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.11"
+    "@strapi/strapi": "4.x"
   },
   "author": {
     "name": "Dominik Míček <dominik.micek@notum.cz> (https://notum.cz/en/strapi)"
@@ -54,6 +50,14 @@
   },
   "scripts": {
     "develop": "tsc -p tsconfig.server.json -w",
-    "build": "tsc"
-  }
+    "build": "tsc",
+    "clean": "rm -rf build",
+    "publish:latest": "cd build && npm publish --tag latest",
+    "prepublish:latest": "npm run clean && npm run build && node build/setup-package.js"
+  },
+  "keywords": [
+    "strapi",
+    "plugin",
+    "location"
+  ]
 }

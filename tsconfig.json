@@ -29,7 +29,8 @@
   "./strapi-server.*",
   "./strapi-admin.*",
    "custom.d.ts",
-  "./admin/**/*",],
+  "./admin/**/*",
+  "./setup-package.ts",],
 
   "exclude": [
     "**/node_modules/**/*",
