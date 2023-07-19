@@ -65,7 +65,7 @@ export default {
     });
   },
 
-  bootstrap(app: any) {},
+  bootstrap() {},
 
   async registerTrads(app: any) {
     const { locales } = app;

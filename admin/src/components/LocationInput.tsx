@@ -11,8 +11,6 @@ import {
   GridItem,
   Box,
   Typography,
-  JSONInput,
-  Input,
 } from "@strapi/design-system";
 import _ from "lodash";
 
