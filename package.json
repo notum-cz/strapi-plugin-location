@@ -1,10 +1,11 @@
 {
-  "name": "location-plugin",
-  "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "name": "@notum-cz/strapi-plugin-location",
+  "version": "1.0.1",
+  "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
+  "license": "SEE LICENSE IN LICENSE",
   "strapi": {
     "name": "location-plugin",
-    "description": "Description of location-plugin plugin",
+    "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
     "kind": "plugin"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
+    "@strapi/strapi": "^4.11.5",
     "@strapi/typescript-utils": "^4.6.0",
     "@types/react": "^17.0.53",
     "@types/react-dom": "^18.0.28",
@@ -22,30 +24,40 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.6",
+    "styled-components": "^5.3.11",
     "typescript": "5.0.4"
   },
   "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0",
-    "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.6"
+    "@strapi/strapi": "4.x"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Dominik Míček <dominik.micek@notum.cz> (https://notum.cz/en/strapi)"
   },
   "maintainers": [
-    {
-      "name": "A Strapi developer"
-    }
+    "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.cz/en/strapi)",
+    "Ondřej Mikulčík <ondrej.mikulcik@notum.cz> (https://notum.cz/en/strapi)"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notum-cz/strapi-plugin-location.git"
+  },
+  "bugs": {
+    "url": "https://github.com/notum-cz/strapi-plugin-location/issues"
+  },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
     "npm": ">=6.0.0"
   },
   "scripts": {
     "develop": "tsc -p tsconfig.server.json -w",
-    "build": "tsc -p tsconfig.server.json"
+    "build": "tsc",
+    "clean": "rm -rf build",
+    "publish:latest": "cd build && npm publish --tag latest",
+    "prepublish:latest": "npm run clean && npm run build && node build/setup-package.js"
   },
-  "license": "MIT"
+  "keywords": [
+    "strapi",
+    "plugin",
+    "location"
+  ]
 }
