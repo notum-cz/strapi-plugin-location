@@ -2314,10 +2314,10 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/helper-plugin@^4.6.0":
-  version "4.11.2"
-  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.11.2.tgz#20a1bae071ab6dd6ba412782b7eff63d11bc7d6a"
-  integrity sha512-UwA4YuangVCoepqQKvWNawNhnZyoxSKzfi2T2tZglD9tVxU9TIVnZH1qhM65gX+vjVEtgRd60jcoVOPu6IqGvw==
+"@strapi/helper-plugin@^4.11.3":
+  version "4.11.3"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.11.3.tgz#eb414b11683c652f1054bcb07e44d135419d725c"
+  integrity sha512-vBgEu4ookJSbpYpPYA6k1pDD+bZvRyVnvRXkuS22+NqSOdTqxZl/r/c93WXnb+rJuhnOHX/9Fg6WouzVK/iefA==
   dependencies:
     axios "1.4.0"
     date-fns "2.30.0"
