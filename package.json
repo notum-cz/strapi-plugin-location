@@ -49,7 +49,7 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "develop": "tsc -p tsconfig.server.json -w",
+    "develop": "NODE_ENV=development tsc -p tsconfig.server.json -w",
     "build": "tsc",
     "clean": "rm -rf build",
     "publish:latest": "cd build && npm publish --tag latest",
