@@ -1589,10 +1589,23 @@
     resolve-cwd "3.0.0"
     semver "7.5.2"
     statuses "2.0.1"
-"@strapi/typescript-utils@4.12.0", "@strapi/typescript-utils@^4.11.7":
+
+"@strapi/typescript-utils@4.12.0":
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.12.0.tgz#f1139c32b0dad7bb476517f142e9c947dc4a105d"
   integrity sha512-MMzXHdTg1fVM8ZYx9M8pkRyK8gtICQOo5o/CFHg9ryxmbn5OEzCqeR+N/KfxOEDmu9M9hXcs4jSz5d10EV6Pvw==
+  dependencies:
+    chalk "4.1.2"
+    cli-table3 "0.6.2"
+    fs-extra "10.0.0"
+    lodash "4.17.21"
+    prettier "2.8.4"
+    typescript "5.1.3"
+
+"@strapi/typescript-utils@^4.12.1":
+  version "4.12.1"
+  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.12.1.tgz#2bfcce1f44a29e8f48280fbba61feb4943630886"
+  integrity sha512-ZttKBMnvbwP6JV6unq13Zy2PcDdukA+rBY6NetmpkRl9Fxr3mezU71GjGBSyisogG9OdSxQpGJssisdLsi/t2Q==
   dependencies:
     chalk "4.1.2"
     cli-table3 "0.6.2"
@@ -1941,10 +1954,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16 || 17 || 18", "@types/react@^18.2.17":
-  version "18.2.17"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.17.tgz#baa565b17ddb649c2dac85b5eaf9e9a1fe0f3b4e"
-  integrity sha512-u+e7OlgPPh+aryjOm5UJMX32OvB2E3QASOAqVMY6Ahs90djagxwv2ya0IctglNbNTexC12qCSMZG47KPfy1hAA==
+"@types/react@*", "@types/react@16 || 17 || 18", "@types/react@^18.2.18":
+  version "18.2.18"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.18.tgz#c8b233919eef1bdc294f6f34b37f9727ad677516"
+  integrity sha512-da4NTSeBv/P34xoZPhtcLkmZuJ+oYaCxHmyHzwaDQo9RQPBeXV+06gEk2FpqEcsX9XrnNLvRpVh6bdavDSjtiQ==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -4299,15 +4312,6 @@ fs-extra@10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
   integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
-  dependencies:
-    graceful-fs "^4.2.0"
-    jsonfile "^6.0.1"
-    universalify "^2.0.0"
-
-fs-extra@10.0.1:
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.1.tgz#27de43b4320e833f6867cc044bfce29fdf0ef3b8"
-  integrity sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
