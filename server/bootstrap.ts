@@ -35,7 +35,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
             `);
           }
           const location = await db(tableName).select(
-            locationField.toLowerCase(),
+            _.snakeCase(locationField),
             "id"
           );
           await Promise.all(
