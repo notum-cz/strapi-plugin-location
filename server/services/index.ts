@@ -20,7 +20,11 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
   getModelsWithLocation: () => {
     // @ts-expect-error
     return strapi.db.config.models
-      .filter((model) => (model.uid as string).startsWith("api::"))
+      .filter(
+        (model) =>
+          (model.uid as string).startsWith("api::") ||
+          model.modelType === "component"
+      )
       .map((model) => {
         const hasLocationField = Object.values(model.attributes).some(
           (entry) => {
