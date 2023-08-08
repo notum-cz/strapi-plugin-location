@@ -34,7 +34,10 @@ export default async ({ strapi }: { strapi: Strapi }) => {
               ADD COLUMN ${locationField}_geom GEOMETRY(Point, 4326);
             `);
           }
-          const location = await db(tableName).select(locationField, "id");
+          const location = await db(tableName).select(
+            locationField.toLowerCase(),
+            "id"
+          );
           await Promise.all(
             location.map(async (entry) => {
               const json = entry[locationField];
