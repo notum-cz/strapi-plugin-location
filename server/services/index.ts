@@ -23,7 +23,8 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
       .filter(
         (model) =>
           (model.uid as string).startsWith("api::") ||
-          model.modelType === "component"
+          model.modelType === "component" ||
+          (model.uid as string) === "plugin::users-permissions.user"
       )
       .map((model) => {
         const hasLocationField = Object.values(model.attributes).some(
