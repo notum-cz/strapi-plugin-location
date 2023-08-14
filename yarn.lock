@@ -1602,10 +1602,10 @@
     prettier "2.8.4"
     typescript "5.1.3"
 
-"@strapi/typescript-utils@^4.12.1":
-  version "4.12.1"
-  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.12.1.tgz#2bfcce1f44a29e8f48280fbba61feb4943630886"
-  integrity sha512-ZttKBMnvbwP6JV6unq13Zy2PcDdukA+rBY6NetmpkRl9Fxr3mezU71GjGBSyisogG9OdSxQpGJssisdLsi/t2Q==
+"@strapi/typescript-utils@^4.12.4":
+  version "4.12.4"
+  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.12.4.tgz#dd74dd2a224f1270378831ec24d74365c746e2da"
+  integrity sha512-Xvv0b1J7doO3bPeNmjadj4l5+9GxCkjAKOwtL+TF+Hx+eTxykCWDnHOjO2t6PGozp6IeBJFcNKEiPXRYSXiybA==
   dependencies:
     chalk "4.1.2"
     cli-table3 "0.6.2"
