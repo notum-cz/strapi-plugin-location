@@ -37,12 +37,10 @@ export default async ({ strapi }: { strapi: Strapi }) => {
             _.snakeCase(locationField),
             "id"
           );
-          console.log(location, tableName, locationField);
           await Promise.all(
             location.map(async (entry) => {
               const json = entry[_.snakeCase(locationField)];
               if (!json?.lng || !json?.lat) return;
-              console.log(locationField);
               await db.raw(`
                 UPDATE ${tableName}
                 SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(${json.lng}, ${json.lat}), 4326)
