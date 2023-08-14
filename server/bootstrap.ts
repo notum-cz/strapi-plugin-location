@@ -21,7 +21,6 @@ export default async ({ strapi }: { strapi: Strapi }) => {
       const locationFields = strapi.services[
         locaitonServiceUid
       ].getLocationFields(model.attributes);
-
       await Promise.all(
         locationFields.map(async (locationField) => {
           const hasColumn = await db.schema.hasColumn(
@@ -40,9 +39,8 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           );
           await Promise.all(
             location.map(async (entry) => {
-              const json = entry[locationField];
+              const json = entry[_.snakeCase(locationField)];
               if (!json?.lng || !json?.lat) return;
-
               await db.raw(`
                 UPDATE ${tableName}
                 SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(${json.lng}, ${json.lat}), 4326)
