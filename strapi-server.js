@@ -1,4 +1,3 @@
 "use strict";
-const path =
-  process.env.NODE_ENV === "development" ? "./dist/server" : "./server";
-module.exports = require(path);
+//Change to ".dist/server" while developing
+module.exports = require("./server");
