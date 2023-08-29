@@ -21,13 +21,12 @@ const createFilterMiddleware = (strapi: Strapi) => {
     if (ctx.request.method !== "GET") return next();
     const url = ctx.request.url;
     const collectionType = url.replace("/api/", "").split("/")[0].split("?")[0];
-
     const model = modelsWithLocation.find(
       (model) => model.collectionName === _.snakeCase(collectionType)
     );
-
     const queryString = ctx.request.querystring as string;
     if (!model || !queryString || !queryString.includes("$location")) {
+      console.log("gets here");
       return next();
     }
 
@@ -41,35 +40,78 @@ const createFilterMiddleware = (strapi: Strapi) => {
 
     // TODO: change this so that it can handle multiple location fields
     const locationQuery = ctx.query.$location as LocationQueryCombined;
+    const locationKeys = Object.keys(locationQuery);
+    const isComponent = locationKeys[0].includes(".");
+    const componentAttrField =
+      isComponent && model.attributes[locationKeys[0].split(".")[0]];
+    const componentModel =
+      componentAttrField &&
+      modelsWithLocation.find(
+        (modelWithLocation) =>
+          modelWithLocation.uid === componentAttrField.component
+      );
     ctx.query = _.omit(ctx.query, ["$location"]);
-    const fieldsToFilter = Object.keys(locationQuery);
-    if (fieldsToFilter.length > 1) {
+    const componentsToFilter = locationKeys.map((key) => key.split(".")[1]);
+    if (locationKeys.length > 1) {
       // TODO: $and or $or logic warning here this is not valid query
       return next();
     }
-    const fieldToFilter = fieldsToFilter[0];
+    const fieldToFilter = isComponent ? componentsToFilter[0] : locationKeys[0];
     if (fieldToFilter !== "$or" && fieldToFilter !== "$and") {
+      const filterModel = isComponent ? componentModel : model;
+      const mutatedLocationQuery = isComponent
+        ? Object.entries(locationQuery).reduce((result, [key, value], i) => {
+            result[componentsToFilter[i]] = value;
+            return result;
+          }, {})
+        : locationQuery;
       const locationQueryParams = getLocationQueryParams(
-        model,
+        filterModel,
         fieldToFilter,
-        locationQuery
+        mutatedLocationQuery
       );
+      console.log(locationQueryParams);
       if (!locationQueryParams) {
         // TODO: add warning that location query is not valid
         return next();
       }
       const [lat, lng, range] = locationQueryParams;
-      const ids = (
-        await db(model.tableName)
-          .select("id")
-          .whereRaw(
-            `
+      const componentIdPairs = await db(`${model.tableName}_components`)
+        .select("entity_id", "component_id")
+        .where({
+          component_type: componentModel.uid,
+        });
+      const matchedComponents = await db(componentModel.tableName)
+        .select("id")
+        .whereIn(
+          "id",
+          componentIdPairs.map((pair) => pair.component_id)
+        )
+        .whereRaw(
+          `
+        ST_DWithin(
+        ${fieldToFilter}_geom,
+        ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
+          [lng, lat, range ?? 0]
+        );
+
+      const ids = isComponent
+        ? matchedComponents.map(
+            (comp) =>
+              componentIdPairs.find((pair) => pair.component_id === comp.id)
+                .entity_id
+          )
+        : (
+            await db(model.tableName)
+              .select("id")
+              .whereRaw(
+                `
               ST_DWithin(
               ${fieldToFilter}_geom,
               ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
-            [lng, lat, range ?? 0]
-          )
-      ).map((item) => item.id);
+                [lng, lat, range ?? 0]
+              )
+          ).map((item) => item.id);
 
       ctx.query = {
         ...ctx.query,
@@ -88,57 +130,57 @@ const createFilterMiddleware = (strapi: Strapi) => {
       return next();
     }
 
-    const query = locationQuery[fieldToFilter] as LogicalQuery["$or" | "$and"];
+    // const query = locationQuery[fieldToFilter] as LogicalQuery["$or" | "$and"];
 
-    const logicalOperators = { $or: "OR", $and: "AND" };
-    const dbQuery = query
-      ?.map((item) => {
-        const logicalFieldsToFilter = Object.keys(item);
+    // const logicalOperators = { $or: "OR", $and: "AND" };
+    // const dbQuery = query
+    //   ?.map((item) => {
+    //     const logicalFieldsToFilter = Object.keys(item);
 
-        const filters = logicalFieldsToFilter
-          .map((field) => {
-            const locationQueryParams = getLocationQueryParams(
-              model,
-              field,
-              item
-            );
-            if (!!locationQueryParams) {
-              const [lat, lng, range] = locationQueryParams;
-              return `ST_DWithin(${field}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${
-                range ?? 0
-              })`;
-            } else {
-              return false;
-            }
-          })
-          .filter(Boolean);
-        return filters;
-      })
-      .flat();
+    //     const filters = logicalFieldsToFilter
+    //       .map((field) => {
+    //         const locationQueryParams = getLocationQueryParams(
+    //           model,
+    //           field,
+    //           item
+    //         );
+    //         if (!!locationQueryParams) {
+    //           const [lat, lng, range] = locationQueryParams;
+    //           return `ST_DWithin(${field}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${
+    //             range ?? 0
+    //           })`;
+    //         } else {
+    //           return false;
+    //         }
+    //       })
+    //       .filter(Boolean);
+    //     return filters;
+    //   })
+    //   .flat();
 
-    if (!dbQuery || dbQuery?.length === 0) {
-      // TODO: add warning that location query is not valid
-      return next();
-    }
+    // if (!dbQuery || dbQuery?.length === 0) {
+    //   // TODO: add warning that location query is not valid
+    //   return next();
+    // }
 
-    const wholeQuery = dbQuery.map((item, index) =>
-      index === 0 ? `(${item})` : `${logicalOperators[fieldToFilter]} ${item}`
-    );
-    const ids = (
-      await db(model.tableName).select("id").whereRaw(wholeQuery.join(" "))
-    ).map((item) => item.id);
+    // const wholeQuery = dbQuery.map((item, index) =>
+    //   index === 0 ? `(${item})` : `${logicalOperators[fieldToFilter]} ${item}`
+    // );
+    // const ids = (
+    //   await db(model.tableName).select("id").whereRaw(wholeQuery.join(" "))
+    // ).map((item) => item.id);
 
-    ctx.query = {
-      ...ctx.query,
-      filters: {
-        ...ctx?.query?.filters,
-        id: {
-          $in: ids.length ? ids : [0],
-        },
-      },
-    };
+    // ctx.query = {
+    //   ...ctx.query,
+    //   filters: {
+    //     ...ctx?.query?.filters,
+    //     id: {
+    //       $in: ids.length ? ids : [0],
+    //     },
+    //   },
+    // };
 
-    await next();
+    // await next();
   };
 };
 
