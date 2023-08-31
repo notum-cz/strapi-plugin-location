@@ -21,12 +21,24 @@ const createFilterMiddleware = (strapi: Strapi) => {
     if (ctx.request.method !== "GET") return next();
     const url = ctx.request.url;
     const collectionType = url.replace("/api/", "").split("/")[0].split("?")[0];
-    const model = modelsWithLocation.find(
-      (model) => model.collectionName === _.snakeCase(collectionType)
-    );
     const queryString = ctx.request.querystring as string;
-    if (!model || !queryString || !queryString.includes("$location")) {
-      console.log("gets here");
+    const locationQuery = ctx.query.$location as LocationQueryCombined;
+    const locationKeys = locationQuery && Object.keys(locationQuery);
+    const isComponentQuery = locationKeys && locationKeys[0].includes(".");
+    const modelCondition = (model) =>
+      model.collectionName === _.snakeCase(collectionType);
+    const collectionModel = !isComponentQuery
+      ? modelsWithLocation.find((model) => modelCondition(model))
+      : // @ts-expect-error
+        strapi.db.config.models.find(
+          (model) => model.collectionName === _.snakeCase(collectionType)
+        );
+
+    if (
+      (!collectionModel && !isComponentQuery) ||
+      !queryString ||
+      !queryString.includes("$location")
+    ) {
       return next();
     }
 
@@ -39,27 +51,28 @@ const createFilterMiddleware = (strapi: Strapi) => {
     }
 
     // TODO: change this so that it can handle multiple location fields
-    const locationQuery = ctx.query.$location as LocationQueryCombined;
-    const locationKeys = Object.keys(locationQuery);
-    const isComponent = locationKeys[0].includes(".");
     const componentAttrField =
-      isComponent && model.attributes[locationKeys[0].split(".")[0]];
+      isComponentQuery &&
+      collectionModel.attributes[locationKeys[0].split(".")[0]];
     const componentModel =
       componentAttrField &&
       modelsWithLocation.find(
         (modelWithLocation) =>
           modelWithLocation.uid === componentAttrField.component
       );
+    console.log(componentModel);
     ctx.query = _.omit(ctx.query, ["$location"]);
     const componentsToFilter = locationKeys.map((key) => key.split(".")[1]);
     if (locationKeys.length > 1) {
       // TODO: $and or $or logic warning here this is not valid query
       return next();
     }
-    const fieldToFilter = isComponent ? componentsToFilter[0] : locationKeys[0];
+    const fieldToFilter = isComponentQuery
+      ? componentsToFilter[0]
+      : locationKeys[0];
     if (fieldToFilter !== "$or" && fieldToFilter !== "$and") {
-      const filterModel = isComponent ? componentModel : model;
-      const mutatedLocationQuery = isComponent
+      const filterModel = isComponentQuery ? componentModel : collectionModel;
+      const mutatedLocationQuery = isComponentQuery
         ? Object.entries(locationQuery).reduce((result, [key, value], i) => {
             result[componentsToFilter[i]] = value;
             return result;
@@ -70,13 +83,14 @@ const createFilterMiddleware = (strapi: Strapi) => {
         fieldToFilter,
         mutatedLocationQuery
       );
-      console.log(locationQueryParams);
       if (!locationQueryParams) {
         // TODO: add warning that location query is not valid
         return next();
       }
       const [lat, lng, range] = locationQueryParams;
-      const componentIdPairs = await db(`${model.tableName}_components`)
+      const componentIdPairs = await db(
+        `${collectionModel.tableName}_components`
+      )
         .select("entity_id", "component_id")
         .where({
           component_type: componentModel.uid,
@@ -94,15 +108,15 @@ const createFilterMiddleware = (strapi: Strapi) => {
         ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
           [lng, lat, range ?? 0]
         );
-
-      const ids = isComponent
+      console.log(componentIdPairs, matchedComponents);
+      const ids = isComponentQuery
         ? matchedComponents.map(
             (comp) =>
               componentIdPairs.find((pair) => pair.component_id === comp.id)
                 .entity_id
           )
         : (
-            await db(model.tableName)
+            await db(collectionModel.tableName)
               .select("id")
               .whereRaw(
                 `
