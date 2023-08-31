@@ -1174,6 +1174,7 @@
   dependencies:
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
+
 "@strapi/admin@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/admin/-/admin-4.12.5.tgz#8025c934a39faeb514f4a38c03e417f671c76286"
@@ -1266,6 +1267,7 @@
     webpack-dev-server "^4.15.0"
     webpackbar "^5.0.2"
     yup "0.32.9"
+
 "@strapi/data-transfer@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/data-transfer/-/data-transfer-4.12.5.tgz#f7a0184f63ccdc5cf69ffff6ce5cadee90fd710c"
@@ -1334,6 +1336,7 @@
     compute-scroll-into-view "^3.0.3"
     prop-types "^15.8.1"
     react-remove-scroll "^2.5.5"
+
 "@strapi/generate-new@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/generate-new/-/generate-new-4.12.5.tgz#98fcb41d297c2388a6fc762cf8ec1f32803a3112"
@@ -1350,6 +1353,7 @@
     ora "^5.4.1"
     semver "7.5.4"
     tar "6.1.13"
+
 "@strapi/generators@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/generators/-/generators-4.12.5.tgz#9c3c9774e6901fe6e9aa1770ba0e19889ae4105f"
@@ -1364,6 +1368,7 @@
     node-plop "0.26.3"
     plop "2.7.6"
     pluralize "8.0.0"
+
 "@strapi/helper-plugin@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.12.5.tgz#e20aead6de4c3ab8dfd870d0ddf9b314f2c08f65"
@@ -1406,6 +1411,7 @@
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.8.0.tgz#ef5585e33ac4ccc9df260fcae790f48e9f2b9f61"
   integrity sha512-8EkvPUcueIyXOu5vzf01GZibpTeG0xh+jBA0kKO5KJOXPrO8/yMisJgRlOS9e9pGD+kInIzif78A1P7RCQI4wA==
+
 "@strapi/logger@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/logger/-/logger-4.12.5.tgz#c517d9c4de102b7b9bae91d07d0ca14fe7f5c6ff"
@@ -1413,6 +1419,7 @@
   dependencies:
     lodash "4.17.21"
     winston "3.10.0"
+
 "@strapi/permissions@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/permissions/-/permissions-4.12.5.tgz#3e99769e6002939184fbecd8468edeff46aab782"
@@ -1455,6 +1462,7 @@
     redux "^4.2.1"
     reselect "4.1.7"
     yup "0.32.9"
+
 "@strapi/plugin-email@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-email/-/plugin-email-4.12.5.tgz#2277583b2afe9944e11aa3409753ba2d4c896af7"
@@ -1468,6 +1476,7 @@
     prop-types "^15.8.1"
     react-intl "6.4.1"
     yup "0.32.9"
+
 "@strapi/plugin-upload@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-upload/-/plugin-upload-4.12.5.tgz#134ecdf3a2b316a2b9f0554ed845d88c73c6350e"
@@ -1499,6 +1508,7 @@
     react-select "5.7.0"
     sharp "0.32.0"
     yup "0.32.9"
+
 "@strapi/provider-audit-logs-local@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/provider-audit-logs-local/-/provider-audit-logs-local-4.12.5.tgz#9399b1596060599d1ffd63ffac896b8410428cd5"
@@ -1645,6 +1655,7 @@
     "@radix-ui/react-visually-hidden" "^1.0.3"
     aria-hidden "^1.2.3"
     react-remove-scroll "^2.5.6"
+
 "@strapi/utils@4.12.5":
   version "4.12.5"
   resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-4.12.5.tgz#c1d452d13efde330c8554b17cabdcaab152ee6b7"
@@ -1931,10 +1942,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16 || 17 || 18", "@types/react@^18.2.20":
-  version "18.2.20"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.20.tgz#1605557a83df5c8a2cc4eeb743b3dfc0eb6aaeb2"
-  integrity sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==
+"@types/react@*", "@types/react@16 || 17 || 18", "@types/react@^18.2.21":
+  version "18.2.21"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.21.tgz#774c37fd01b522d0b91aed04811b58e4e0514ed9"
+  integrity sha512-neFKG/sBAwGxHgXiIxnbm3/AAVQ/cMRS93hvBpg8xYRbeQSPVABp9U2bRnPf0iI4+Ucdv3plSxKK+3CW2ENJxA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
