@@ -15,7 +15,7 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.12.5",
+    "@strapi/strapi": "^4.13.1",
     "@strapi/typescript-utils": "^4.12.5",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
