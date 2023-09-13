@@ -27,7 +27,6 @@ export default async ({ strapi }: { strapi: Strapi }) => {
             `${tableName}`,
             `${locationField.toLowerCase()}_geom`
           );
-          console.log(locationField, hasColumn);
           if (!hasColumn) {
             await db.raw(`
               ALTER TABLE ${tableName}
