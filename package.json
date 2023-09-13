@@ -15,9 +15,9 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.12.5",
-    "@strapi/typescript-utils": "^4.12.5",
-    "@types/react": "^18.2.20",
+    "@strapi/strapi": "^4.13.1",
+    "@strapi/typescript-utils": "^4.13.1",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
@@ -25,7 +25,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "styled-components": "^5.3.11",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "peerDependencies": {
     "@strapi/strapi": "4.x"

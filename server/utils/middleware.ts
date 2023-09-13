@@ -20,7 +20,9 @@ const createFilterMiddleware = (strapi: Strapi) => {
   return async (ctx, next) => {
     if (ctx.request.method !== "GET") return next();
     const url = ctx.request.url;
-    const collectionType = url.replace("/api/", "").split("/")[0].split("?")[0];
+
+    const collectionType = url.replace("strapi.config.api.rest.prefix", "").split("/")[0].split("?")[0];
+    
     const queryString = ctx.request.querystring as string;
     const locationQuery = ctx.query.$location as LocationQueryCombined;
     const locationKeys = locationQuery && Object.keys(locationQuery);
