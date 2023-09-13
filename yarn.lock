@@ -1597,10 +1597,22 @@
     semver "7.5.4"
     statuses "2.0.1"
 
-"@strapi/typescript-utils@4.13.1", "@strapi/typescript-utils@^4.13.1":
+"@strapi/typescript-utils@4.13.1":
   version "4.13.1"
   resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.13.1.tgz#fa9f4d72561b680c6150c9f2749a8317064a0e1f"
   integrity sha512-dFTeHPPbwlhkdQJVTB2H0pb8ZnB+uwQQhU81vy5GpPYYIuVmso6KnkmkfdB+tI09+Buic9nxVfQmFJBy0q8rLg==
+  dependencies:
+    chalk "4.1.2"
+    cli-table3 "0.6.2"
+    fs-extra "10.0.0"
+    lodash "4.17.21"
+    prettier "2.8.4"
+    typescript "5.1.3"
+
+"@strapi/typescript-utils@^4.13.5":
+  version "4.13.5"
+  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.13.5.tgz#3491de24788f6eb6bec312cb6a109f6331719c2c"
+  integrity sha512-U/saaKHUfLmSY41eg30jFEdk/YwRybLAJkdL418DvPZTAkapnr5dFu+qS1eXhhUan6IStTcU1SFQf5WuebVzbA==
   dependencies:
     chalk "4.1.2"
     cli-table3 "0.6.2"
