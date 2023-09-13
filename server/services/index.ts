@@ -41,7 +41,6 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
             }
           }
         );
-
         return hasLocationField ? model : false;
       })
       .filter(Boolean);
