@@ -20,7 +20,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
   },
 
   "include": [    "./server/**/*",
