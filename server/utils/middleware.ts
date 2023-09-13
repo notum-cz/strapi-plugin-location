@@ -21,8 +21,11 @@ const createFilterMiddleware = (strapi: Strapi) => {
     if (ctx.request.method !== "GET") return next();
     const url = ctx.request.url;
 
-    const collectionType = url.replace("strapi.config.api.rest.prefix", "").split("/")[0].split("?")[0];
-    
+    const collectionType = url
+      .replace("strapi.config.api.rest.prefix", "")
+      .split("/")[0]
+      .split("?")[0];
+
     const queryString = ctx.request.querystring as string;
     const locationQuery = ctx.query.$location as LocationQueryCombined;
     const locationKeys = locationQuery && Object.keys(locationQuery);
@@ -74,7 +77,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
     if (fieldToFilter !== "$or" && fieldToFilter !== "$and") {
       const filterModel = isComponentQuery ? componentModel : collectionModel;
       const mutatedLocationQuery = isComponentQuery
-        ? Object.entries(locationQuery).reduce((result, [key, value], i) => {
+        ? Object.entries(locationQuery).reduce((result, [, value], i) => {
             result[componentsToFilter[i]] = value;
             return result;
           }, {})
