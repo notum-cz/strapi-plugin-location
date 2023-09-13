@@ -9,6 +9,7 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 ## 🙉 What does the plugin do for you?
 
 - ✅ Provides a custom location input field for latitude and longitude values
+- ✅ Display the location on a map and fine-tune it by moving a marker using drag-and-drop functionality, all without the need for a Google Maps API key.
 - ✅ Handles storage of location values as geometry types in a PostGIS database
 - ✅ Allows filtering of items based on their location
 - ✅ Enables searching for items with the same location or within a specified range
@@ -47,7 +48,14 @@ Also this format is supported:
 `localhost:1337/api/restaurants?$location[coords][lat]=49.200949303006055&$location[coords][lng]=16.623833585841673`
 
 ## 🛣️ Road map
-- ✨ Add a leaflet map to display the location
+Are any of these features significant to you? Please show your support by giving a thumbs up on the linked issues. This will help us assess their priority on the roadmap.
+### Q4 2023
+- ✨ [Geolocation shape field](https://github.com/notum-cz/strapi-plugin-location/issues/44)
+- ✨ [MySQL support](https://github.com/notum-cz/strapi-plugin-location/issues/31)
+### Q1 2024 
+- ✨ [GraphQL support](https://github.com/notum-cz/strapi-plugin-location/issues/46)
+- ✨ [Reverse geocoding](https://github.com/notum-cz/strapi-plugin-location/issues/45)
+  
 ## 🐛 Bugs
 
 We manage bugs through [GitHub Issues](https://github.com/notum-cz/strapi-plugin-location/issues). <br>
