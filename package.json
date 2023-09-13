@@ -12,11 +12,14 @@
     "@strapi/design-system": "^1.6.3",
     "@strapi/helper-plugin": "^4.11.3",
     "@strapi/icons": "^1.6.3",
-    "prop-types": "^15.7.2"
+    "leaflet": "^1.9.4",
+    "prop-types": "^15.7.2",
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
     "@strapi/strapi": "^4.13.1",
     "@strapi/typescript-utils": "^4.13.1",
+    "@types/leaflet": "^1.9.4",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/react-router-dom": "^5.3.3",
