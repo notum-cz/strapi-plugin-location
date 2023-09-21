@@ -33,7 +33,44 @@ module.exports = ({ env }) => ({
 	},
 });
 ```
+3. extend `config/middlewares.js` as shown in this example:
 
+```
+export default [
+  "strapi::errors",
+  {
+    name: "strapi::security",
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          "connect-src": ["'self'", "https:"],
+          "img-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "https://market-assets.strapi.io",
+            "https://tile.openstreetmap.org",
+            "https://a.tile.openstreetmap.org",
+            "https://b.tile.openstreetmap.org",
+            "https://c.tile.openstreetmap.org",
+          ],
+          "media-src": ["'self'", "data:", "blob:"],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
+  "strapi::cors",
+  "strapi::poweredBy",
+  "strapi::logger",
+  "strapi::query",
+  "strapi::body",
+  "strapi::session",
+  "strapi::favicon",
+  "strapi::public",
+];
+```
 ## ⚙️ Usage
  - To use a custom input field for latitude and longitude go to the Content-type-builder of your application –> select a desired content-type -> click add another field -> select Cutstom tab -> name the field and hit the save button.
  - To search or filter items based on their location use url parameter `location` in the following formats.
