@@ -33,21 +33,17 @@ export default async ({ strapi }: { strapi: Strapi }) => {
               ADD COLUMN ${locationField}_geom GEOMETRY(Point, 4326);
             `);
           }
-          const location = await db(tableName).select(
-            _.snakeCase(locationField),
-            "id"
-          );
-          await Promise.all(
-            location.map(async (entry) => {
-              const json = entry[_.snakeCase(locationField)];
-              if (!json?.lng || !json?.lat) return;
-              await db.raw(`
-                UPDATE ${tableName}
-                SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(${json.lng}, ${json.lat}), 4326)
-                WHERE id = ${entry.id};
-              `);
-            })
-          );
+          // Generate point column field using only a query
+          await db.raw(`
+          UPDATE ${tableName}
+          SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(
+              CAST((${locationField}::json->'lng')::text AS DOUBLE PRECISION),
+              CAST((${locationField}::json->'lat')::text AS DOUBLE PRECISION)
+
+          ), 4326)
+          WHERE (${locationField}::json->'lng')::text != 'null' AND
+                (${locationField}::json->'lat')::text != 'null'
+          `);
         })
       );
     })
