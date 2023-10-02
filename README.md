@@ -33,7 +33,8 @@ module.exports = ({ env }) => ({
 	},
 });
 ```
-3. extend `config/middlewares.js` as shown in this example:
+3. run `npm build` or `yarn build` to get the plugin activated in the admin UI
+4. extend `config/middlewares.js` as shown in this example:
 
 ```
 export default [
