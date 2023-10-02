@@ -39,7 +39,11 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           );
           await Promise.all(
             location.map(async (entry) => {
-              const json = entry[_.snakeCase(locationField)];
+              let json = entry[_.snakeCase(locationField)];
+              // Parse JSON retrieved from Postgres
+              if (typeof json === 'string') {
+                json = JSON.parse(json);
+              }
               if (!json?.lng || !json?.lat) return;
               await db.raw(`
                 UPDATE ${tableName}
