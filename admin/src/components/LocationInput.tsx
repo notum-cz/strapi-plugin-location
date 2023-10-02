@@ -4,29 +4,28 @@
  *
  */
 
-import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
-  NumberInput,
+  Box,
+  Button,
   Grid,
   GridItem,
-  Box,
-  Typography,
-  Button,
-  ModalLayout,
   ModalBody,
-  ModalHeader,
   ModalFooter,
+  ModalHeader,
+  ModalLayout,
+  Typography,
 } from "@strapi/design-system";
-import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import React, { useMemo, useRef, useState } from "react";
 //@ts-ignore
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 //@ts-ignore
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 //@ts-ignore
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import _ from "lodash";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import LocationInputForm from "./LocationInputForm";
 
 //@ts-ignore
 const icon = L.icon({
@@ -67,22 +66,23 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
         if (marker != null) {
           //@ts-ignore
           const { lat: newLat, lng: newLng } = marker.getLatLng();
-          setLocation([newLat, newLng]);
+          handleSetLocation([newLat, newLng]);
         }
       },
     }),
     []
   );
 
-  useEffect(() => {
+  const handleSetLocation = (newValue: [number | null, number | null]) => {
+    setLocation(newValue);
     onChange({
       target: {
         name,
-        value: JSON.stringify({ lat, lng }),
+        value: JSON.stringify({ lat: newValue[0], lng: newValue[1] }),
         type: attribute.type,
       },
     });
-  }, [lng, lat, onChange, attribute.type, name]);
+  };
 
   return (
     <Box>
@@ -90,24 +90,11 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
         {name}
       </Typography>
       <Grid gap={5}>
-        <GridItem col={6}>
-          <NumberInput
-            label="Lat"
-            value={lat ? lat : 0}
-            onValueChange={(newValue: number) =>
-              setLocation((prev) => [newValue, prev[1]])
-            }
-          />
-        </GridItem>
-        <GridItem col={6}>
-          <NumberInput
-            label="Lng"
-            value={lng ? lng : 0}
-            onValueChange={(newValue: number) =>
-              setLocation((prev) => [prev[0], newValue])
-            }
-          />
-        </GridItem>
+        <LocationInputForm
+          lat={lat}
+          lng={lng}
+          handleSetLocation={handleSetLocation}
+        />
         <GridItem col={12}>
           <Button onClick={() => setIsModalVisible((prev) => !prev)}>
             Open map
@@ -129,24 +116,11 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
               </ModalHeader>
               <ModalBody>
                 <Grid gap={5} className="pb-2">
-                  <GridItem col={6}>
-                    <NumberInput
-                      label="Lat"
-                      value={lat ? lat : 0}
-                      onValueChange={(newValue: number) =>
-                        setLocation((prev) => [newValue, prev[1]])
-                      }
-                    />
-                  </GridItem>
-                  <GridItem col={6}>
-                    <NumberInput
-                      label="Lng"
-                      value={lng ? lng : 0}
-                      onValueChange={(newValue: number) =>
-                        setLocation((prev) => [prev[0], newValue])
-                      }
-                    />
-                  </GridItem>
+                  <LocationInputForm
+                    lat={lat}
+                    lng={lng}
+                    handleSetLocation={handleSetLocation}
+                  />
                 </Grid>
                 <Box paddingTop={6}>
                   <MapContainer
