@@ -22,8 +22,8 @@ const createFilterMiddleware = (strapi: Strapi) => {
     const url = ctx.request.url;
 
     const collectionType = url
-      .replace("strapi.config.api.rest.prefix", "")
-      .split("/")[0]
+      .replace(strapi.config.api.rest.prefix, "")
+      .split("/")[1]
       .split("?")[0];
 
     const queryString = ctx.request.querystring as string;
