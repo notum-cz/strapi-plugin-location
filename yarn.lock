@@ -1924,11 +1924,22 @@
     typescript "5.2.2"
     vite "4.4.9"
     yup "0.32.9"
-
 "@strapi/typescript-utils@4.13.7", "@strapi/typescript-utils@^4.13.1":
   version "4.13.7"
   resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.13.7.tgz#71d3818a992cb80cd0025f6143bdb5fcfc5e8964"
   integrity sha512-9wm3/cv94zbACgcBw9+ZroVSHaffDBKYNq3BI1yREXViI3biTqjSeDmbdBc9Yf1NbshvAuoh5b1YA38jQgG2qw==
+  dependencies:
+    chalk "4.1.2"
+    cli-table3 "0.6.2"
+    fs-extra "10.0.0"
+    lodash "4.17.21"
+    prettier "2.8.4"
+    typescript "5.2.2"
+
+"@strapi/typescript-utils@^4.14.0":
+  version "4.14.0"
+  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.14.0.tgz#9cbbee865d80af892003f89a748c6167999cb9a8"
+  integrity sha512-AWswISE5S6NfEkPdLwJkWHIXgPPbfIYKQG/BPbU5LWKro/JX+oUTuN7GL5/VdaCRkiR/YfxtktN8YXgjeTrY3g==
   dependencies:
     chalk "4.1.2"
     cli-table3 "0.6.2"
