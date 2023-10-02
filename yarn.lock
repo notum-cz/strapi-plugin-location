@@ -1924,7 +1924,8 @@
     typescript "5.2.2"
     vite "4.4.9"
     yup "0.32.9"
-"@strapi/typescript-utils@4.13.7", "@strapi/typescript-utils@^4.13.1":
+
+"@strapi/typescript-utils@4.13.7":
   version "4.13.7"
   resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.13.7.tgz#71d3818a992cb80cd0025f6143bdb5fcfc5e8964"
   integrity sha512-9wm3/cv94zbACgcBw9+ZroVSHaffDBKYNq3BI1yREXViI3biTqjSeDmbdBc9Yf1NbshvAuoh5b1YA38jQgG2qw==
@@ -2208,10 +2209,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/leaflet@^1.9.4":
-  version "1.9.4"
-  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.4.tgz#fd8898018765cc30db1103ab3453a9a2a85570cb"
-  integrity sha512-kfwgQf4eOxoe/tD9CaKQrBKHbc7VpyfJOG5sxsQtkH+ML9xYa8hUC3UMa0wU1pKfciJtO0pU9g9XbWhPo7iBCA==
+"@types/leaflet@^1.9.6":
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.6.tgz#d58ecdbe9f1f383cb0a7133a020cd05bfe00a762"
+  integrity sha512-HakGTK5LBBWegNWsAmTlG55zN1zszYec7aG47/z6SzT90bW2vqjmbqk3YKAbrtveO+G7fSTKTYqVbIwAFnTrbg==
   dependencies:
     "@types/geojson" "*"
 
