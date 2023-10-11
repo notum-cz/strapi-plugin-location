@@ -92,43 +92,48 @@ const createFilterMiddleware = (strapi: Strapi) => {
         return next();
       }
       const [lat, lng, range] = locationQueryParams;
-      const componentIdPairs = await db(
-        `${collectionModel.tableName}_components`
-      )
-        .select("entity_id", "component_id")
-        .where({
-          component_type: componentModel.uid,
-        });
-      const matchedComponents = await db(componentModel.tableName)
-        .select("id")
-        .whereIn(
-          "id",
-          componentIdPairs.map((pair) => pair.component_id)
-        )
-        .whereRaw(
-          `
+
+      const componentIdPairs = isComponentQuery
+        ? await db(`${collectionModel.tableName}_components`)
+            .select("entity_id", "component_id")
+            .where({
+              component_type: componentModel.uid,
+            })
+        : null;
+      const matchedComponents =
+        isComponentQuery && componentIdPairs
+          ? await db(componentModel.tableName)
+              .select("id")
+              .whereIn(
+                "id",
+                componentIdPairs.map((pair) => pair.component_id)
+              )
+              .whereRaw(
+                `
         ST_DWithin(
         ${fieldToFilter}_geom,
         ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
-          [lng, lat, range ?? 0]
-        );
-      const ids = isComponentQuery
-        ? matchedComponents.map(
-            (comp) =>
-              componentIdPairs.find((pair) => pair.component_id === comp.id)
-                .entity_id
-          )
-        : (
-            await db(collectionModel.tableName)
-              .select("id")
-              .whereRaw(
-                `
+                [lng, lat, range ?? 0]
+              )
+          : null;
+      const ids =
+        isComponentQuery && matchedComponents && componentIdPairs
+          ? matchedComponents.map(
+              (comp) =>
+                componentIdPairs.find((pair) => pair.component_id === comp.id)
+                  .entity_id
+            )
+          : (
+              await db(collectionModel.tableName)
+                .select("id")
+                .whereRaw(
+                  `
               ST_DWithin(
               ${fieldToFilter}_geom,
               ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
-                [lng, lat, range ?? 0]
-              )
-          ).map((item) => item.id);
+                  [lng, lat, range ?? 0]
+                )
+            ).map((item) => item.id);
 
       ctx.query = {
         ...ctx.query,
