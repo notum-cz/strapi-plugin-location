@@ -17,11 +17,11 @@
     "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.14.0",
+    "@strapi/strapi": "^4.14.3",
     "@strapi/typescript-utils": "^4.14.3",
     "@types/leaflet": "^1.9.6",
     "@types/react": "^18.2.25",
-    "@types/react-dom": "^18.2.7",
+    "@types/react-dom": "^18.2.11",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
