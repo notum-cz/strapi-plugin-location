@@ -47,7 +47,6 @@ export default async ({ strapi }: { strapi: Strapi }) => {
 
   strapi.customFields.register({
     name: "location",
-    //@ts-expect-error
     plugin: pluginId,
     type: "json",
     inputSize: {
