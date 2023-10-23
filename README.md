@@ -6,6 +6,8 @@ This plugin allows users to create location inputs and store latitude and longit
 
 This plugin requires a PostgreSQL database with the PostGIS extension enabled (can be used on that database plugin will enable it for you if it can). Make sure you have a compatible database set up before using this plugin. For development I used postgis docker image from here: https://registry.hub.docker.com/r/postgis/postgis/
 
+⚠️ Filtering by data in relations is not supported.
+
 ## 🙉 What does the plugin do for you?
 
 - ✅ Provides a custom location input field for latitude and longitude values
