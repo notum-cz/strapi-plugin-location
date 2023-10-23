@@ -5,7 +5,6 @@ import { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 const locaitonServiceUid = "plugin::location-plugin.locationServices";
 
 const createSubscriber = (strapi: Strapi): Subscriber => {
-  //@ts-expect-error
   const db = strapi.db.connection;
   const modelsWithLocation =
     strapi.services[locaitonServiceUid].getModelsWithLocation();

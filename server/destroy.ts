@@ -1,7 +1,6 @@
 import { Strapi } from "@strapi/strapi";
 
 export default async ({ strapi }: { strapi: Strapi }) => {
-  //@ts-expect-error
   const db = strapi.db.connection;
 
   const modelsWithLocation =

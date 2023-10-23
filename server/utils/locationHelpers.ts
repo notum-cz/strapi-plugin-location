@@ -12,6 +12,7 @@ export const getLocationQueryParams = (
   fieldToFilter,
   locationQuery
 ): [number | null, number | null, number] | null => {
+  console.log(fieldToFilter);
   if (
     model?.attributes?.[fieldToFilter]?.customField !==
     "plugin::location-plugin.location"
