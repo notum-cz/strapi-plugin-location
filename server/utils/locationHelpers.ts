@@ -1,5 +1,8 @@
+import { get } from "lodash";
+
 export const getLocationFromString = (location: string) => {
   const [latStr, lngStr, rangeStr] = location.split(",");
+  console.log(location, "lcn");
   return [
     parseFloat(latStr),
     parseFloat(lngStr),
@@ -12,7 +15,6 @@ export const getLocationQueryParams = (
   fieldToFilter,
   locationQuery
 ): [number | null, number | null, number] | null => {
-  console.log(fieldToFilter);
   if (
     model?.attributes?.[fieldToFilter]?.customField !==
     "plugin::location-plugin.location"
@@ -22,9 +24,13 @@ export const getLocationQueryParams = (
   let range = 0,
     lat: number | null = null,
     lng: number | null = null;
-  if (typeof locationQuery[fieldToFilter] === "string") {
-    [lat, lng, range] = getLocationFromString(locationQuery[fieldToFilter]);
+  console.log(locationQuery, fieldToFilter);
+  if (typeof get(locationQuery, fieldToFilter)) {
+    [lat, lng, range] = getLocationFromString(
+      get(locationQuery, fieldToFilter)
+    );
   } else {
+    //TODO: Solve for relations
     if (locationQuery[fieldToFilter]?.range) {
       range = parseInt(locationQuery[fieldToFilter].range);
     }

@@ -13,6 +13,7 @@ type LocationQueryCombined = LocationQuery | LogicalQuery;
 
 const locaitonServiceUid = "plugin::location-plugin.locationServices";
 const createFilterMiddleware = (strapi: Strapi) => {
+  //@ts-expect-error
   const db = strapi.db.connection;
   const modelsWithLocation =
     strapi.services[locaitonServiceUid].getModelsWithLocation();
@@ -31,8 +32,6 @@ const createFilterMiddleware = (strapi: Strapi) => {
     const locationKeys = locationQuery && Object.keys(locationQuery);
     const isRelationQuery =
       locationKeys && typeof locationQuery[locationKeys[0]] === "object";
-
-    console.log(locationKeys[0]);
     const isComponentQuery = locationKeys && locationKeys[0].includes(".");
     const modelCondition = (model) =>
       model.collectionName === _.snakeCase(collectionType);
@@ -42,7 +41,6 @@ const createFilterMiddleware = (strapi: Strapi) => {
         strapi.db.config.models.find(
           (model) => model.collectionName === _.snakeCase(collectionType)
         );
-
     if (
       (!collectionModel && !isComponentQuery) ||
       !queryString ||
@@ -76,13 +74,11 @@ const createFilterMiddleware = (strapi: Strapi) => {
       return next();
     }
     if (isRelationQuery) {
-      console.log(locationKeys[0]);
       locationKeys[0] = `${locationKeys[0]}.headquarters`;
     }
     const fieldToFilter = isComponentQuery
       ? componentsToFilter[0]
       : locationKeys[0];
-    console.log("here", locationKeys, locationKeys[0]);
     if (fieldToFilter !== "$or" && fieldToFilter !== "$and") {
       const filterModel = isComponentQuery ? componentModel : collectionModel;
       const mutatedLocationQuery = isComponentQuery
@@ -96,6 +92,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
         fieldToFilter,
         mutatedLocationQuery
       );
+      console.log(locationQueryParams);
       if (!locationQueryParams) {
         // TODO: add warning that location query is not valid
         return next();
