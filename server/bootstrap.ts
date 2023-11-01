@@ -9,7 +9,6 @@ export default async ({ strapi }: { strapi: Strapi }) => {
     // TODO: add information that plugin is disabled
     return;
   }
-  //@ts-expect-error
   const db = strapi.db.connection;
 
   const modelsWithLocation =
@@ -24,26 +23,27 @@ export default async ({ strapi }: { strapi: Strapi }) => {
       ].getLocationFields(model.attributes);
       await Promise.all(
         locationFields.map(async (locationField) => {
+          const locationFieldSnakeCase = _.snakeCase(locationField);
           const hasColumn = await db.schema.hasColumn(
             `${tableName}`,
-            `${locationField.toLowerCase()}_geom`
+            `${locationFieldSnakeCase}_geom`
           );
           if (!hasColumn) {
             await db.raw(`
               ALTER TABLE ${tableName}
-              ADD COLUMN ${locationField}_geom GEOMETRY(Point, 4326);
+              ADD COLUMN ${locationFieldSnakeCase}_geom GEOMETRY(Point, 4326);
             `);
           }
           // Generate point column field using only a query
           await db.raw(`
           UPDATE ${tableName}
-          SET ${locationField}_geom = ST_SetSRID(ST_MakePoint(
-              CAST((${locationField}::json->'lng')::text AS DOUBLE PRECISION),
-              CAST((${locationField}::json->'lat')::text AS DOUBLE PRECISION)
+          SET ${locationFieldSnakeCase}_geom = ST_SetSRID(ST_MakePoint(
+              CAST((${locationFieldSnakeCase}::json->'lng')::text AS DOUBLE PRECISION),
+              CAST((${locationFieldSnakeCase}::json->'lat')::text AS DOUBLE PRECISION)
 
           ), 4326)
-          WHERE (${locationField}::json->'lng')::text != 'null' AND
-                (${locationField}::json->'lat')::text != 'null'
+          WHERE (${locationFieldSnakeCase}::json->'lng')::text != 'null' AND
+                (${locationFieldSnakeCase}::json->'lat')::text != 'null'
           `);
         })
       );
@@ -51,7 +51,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
   );
 
   const subscriber = createSubscriber(strapi);
-  //@ts-expect-error
+  //@ts-ignore
   strapi.db.lifecycles.subscribe(subscriber);
 
   const middleware = createFilterMiddleware(strapi);
