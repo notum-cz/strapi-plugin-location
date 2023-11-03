@@ -9,6 +9,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
     // TODO: add information that plugin is disabled
     return;
   }
+  //@ts-expect-error
   const db = strapi.db.connection;
 
   const modelsWithLocation =

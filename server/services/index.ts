@@ -18,6 +18,7 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
       .filter(Boolean);
   },
   getModelsWithLocation: () => {
+    //@ts-expect-error
     return strapi.db.config.models
       .filter(
         (model) =>

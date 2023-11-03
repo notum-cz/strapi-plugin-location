@@ -1,11 +1,12 @@
 import { Strapi } from "@strapi/strapi";
-import { Event } from "@strapi/database/lib/lifecycles";
-import { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
+import { Event } from "@strapi/database/dist/lifecycles";
+import type { Subscriber } from "@strapi/database/dist/lifecycles/types";
 import _ from "lodash";
 
 const locaitonServiceUid = "plugin::location-plugin.locationServices";
 
 const createSubscriber = (strapi: Strapi): Subscriber => {
+  //@ts-expect-error
   const db = strapi.db.connection;
   const modelsWithLocation =
     strapi.services[locaitonServiceUid].getModelsWithLocation();
