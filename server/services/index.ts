@@ -18,11 +18,11 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
       .filter(Boolean);
   },
   getModelsWithLocation: () => {
-    // @ts-expect-error
     return strapi.db.config.models
       .filter(
         (model) =>
           (model.uid as string).startsWith("api::") ||
+          //@ts-ignore
           model.modelType === "component" ||
           (model.uid as string) === "plugin::users-permissions.user"
       )
