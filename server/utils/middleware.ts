@@ -13,7 +13,6 @@ type LocationQueryCombined = LocationQuery | LogicalQuery;
 
 const locaitonServiceUid = "plugin::location-plugin.locationServices";
 const createFilterMiddleware = (strapi: Strapi) => {
-  //@ts-expect-error
   const db = strapi.db.connection;
   const modelsWithLocation =
     strapi.services[locaitonServiceUid].getModelsWithLocation();
@@ -35,8 +34,8 @@ const createFilterMiddleware = (strapi: Strapi) => {
       model.collectionName === _.snakeCase(collectionType);
     const collectionModel = !isComponentQuery
       ? modelsWithLocation.find((model) => modelCondition(model))
-      : // @ts-expect-error
-        strapi.db.config.models.find(
+      : strapi.db.config.models.find(
+          //@ts-ignore
           (model) => model.collectionName === _.snakeCase(collectionType)
         );
 
@@ -112,7 +111,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
               .whereRaw(
                 `
         ST_DWithin(
-        ${fieldToFilter}_geom,
+        ${_.snakeCase(fieldToFilter)}_geom,
         ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
                 [lng, lat, range ?? 0]
               )
@@ -130,7 +129,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
                 .whereRaw(
                   `
               ST_DWithin(
-              ${fieldToFilter}_geom,
+              ${_.snakeCase(fieldToFilter)}_geom,
               ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
                   [lng, lat, range ?? 0]
                 )
@@ -169,7 +168,9 @@ const createFilterMiddleware = (strapi: Strapi) => {
             );
             if (!!locationQueryParams) {
               const [lat, lng, range] = locationQueryParams;
-              return `ST_DWithin(${field}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${
+              return `ST_DWithin(${_.snakeCase(
+                field
+              )}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${
                 range ?? 0
               })`;
             } else {
