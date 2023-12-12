@@ -39,6 +39,29 @@ export default {
         // declare options here
       },
     });
+
+    app.customFields.register({
+      name: "location-shape",
+      pluginId: pluginId, // the custom field is created by a color-picker plugin
+      type: "json", // the color will be stored as a string
+      intlLabel: {
+        id: `${pluginId}.locationShape.label`,
+        defaultMessage: "Location shape field",
+      },
+      intlDescription: {
+        id: `${pluginId}.locationShape.description`,
+        defaultMessage: "Select a location area",
+      },
+      components: {
+        Input: async () =>
+          import(
+            /* webpackChunkName: "input-component" */ "./components/ShapeInput"
+          ),
+      },
+      options: {
+        // declare options here
+      },
+    });
   },
 
   bootstrap() {},

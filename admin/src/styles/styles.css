@@ -1,0 +1,16 @@
+.custom-marker{
+    background-color: 	#BF40BF ;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.location-input-control{
+   display: flex;
+   height: 100%;
+   align-items: end;
+}
