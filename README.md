@@ -109,6 +109,10 @@ Project owner: **Ondřej Janošík** <br>
 
 Wanna be here? Open an issue (and solve it), PR or share improvement idea and you will become a listed contributor.
 
+## 💬 Community
+
+Join our [Discord server](https://discord.gg/hZRCcfWq) to discuss new features, implementation challenges or anything related to this plugin.  
+
 ## 🚀 Created with passion by [Notum Technologies](https://notum.cz/en)
 
 - Official STRAPI partner and Czech based custom development agency.
