@@ -25,17 +25,34 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
 
       await Promise.all(
         locationFields.map(async (locationField) => {
-          const data = event.params.data[locationField];
+          if (locationField.type === "location") {
+            console.log(event.params.data, locationField);
+            const data = event.params.data[locationField.field];
+            if (!data?.lng || !data?.lat) return;
 
-          if (!data?.lng || !data?.lat) return;
-
-          await db.raw(`
-              UPDATE ${model.tableName}
-              SET ${_.snakeCase(
-                locationField
-              )}_geom = ST_SetSRID(ST_MakePoint(${data.lng}, ${data.lat}), 4326)
-              WHERE id = ${id};
+            await db.raw(`
+            UPDATE ${model.tableName}
+            SET ${_.snakeCase(
+              locationField.field
+            )}_geom = ST_SetSRID(ST_MakePoint(${data.lng}, ${data.lat}), 4326)
+            WHERE id = ${id};
           `);
+          }
+
+          if (locationField.type === "shape") {
+            const data = event.params.data[locationField.field];
+            if (!data) return;
+            console.log(data);
+            await db.raw(`
+            UPDATE ${model.tableName}
+            SET ${_.snakeCase(
+              locationField.field
+            )}_geom = ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
+              data
+            )}'), 4326)
+            WHERE id = ${id};
+          `);
+          }
         })
       );
     },
@@ -44,19 +61,34 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
       const locationFields = strapi.services[
         locaitonServiceUid
       ].getLocationFields(model.attributes);
-
       await Promise.all(
         locationFields.map(async (locationField) => {
-          const data = params.data[locationField];
-          if (!params.where.id || !data?.lng || !data?.lat) return;
+          if (locationField.type === "location") {
+            const data = params.data[locationField.field];
+            if (!params.where.id || !data?.lng || !data?.lat) return;
 
-          await db.raw(`
+            await db.raw(`
             UPDATE ${model.tableName}
-            SET ${_.snakeCase(locationField)}_geom = ST_SetSRID(ST_MakePoint(${
-            data.lng
-          }, ${data.lat}), 4326)
+            SET ${_.snakeCase(
+              locationField.field
+            )}_geom = ST_SetSRID(ST_MakePoint(${data.lng}, ${data.lat}), 4326)
             WHERE id = ${params.where.id};
           `);
+          }
+          if (locationField.type === "shape") {
+            const data = params.data[locationField.field];
+            if (!params.where.id || !data) return;
+            console.log(data);
+            await db.raw(`
+            UPDATE ${model.tableName}
+            SET ${_.snakeCase(
+              locationField.field
+            )}_geom = ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
+              data
+            )}'), 4326)
+            WHERE id = ${params.where.id};
+          `);
+          }
         })
       );
     },

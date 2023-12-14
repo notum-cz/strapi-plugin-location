@@ -1,9 +1,3 @@
-/**
- *
- * LocationInput
- *
- */
-
 import {
   Box,
   Button,
@@ -15,9 +9,8 @@ import {
   ModalLayout,
   Typography,
 } from "@strapi/design-system";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
 //@ts-ignore
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 //@ts-ignore
@@ -28,19 +21,14 @@ import { MapContainer, Polygon, TileLayer } from "react-leaflet";
 import LocationInputForm from "./LocationInputForm";
 import MarkerWrapper from "./MarkerWrapper";
 import "../styles/styles.css";
-
-//@ts-ignore
-const icon = L.icon({
-  iconUrl: markerIcon,
-  iconRetinaUrl: iconRetina,
-  iconSize: [25, 41],
-  iconAnchor: [12.5, 41],
-});
+import { convertArrayToGeoJSON, convertGeoJSONToArray } from "../utils/helpers";
 
 const LocationShapeInput = ({ value, onChange, name, attribute }) => {
   const [defLat, defLng] = [49.195678016117164, 16.608182539182483];
   const [shape, setShape] = useState<[number, number][]>(
-    value && value !== "null" ? JSON.parse(value) : [[defLat, defLng]]
+    value && value !== "null"
+      ? convertGeoJSONToArray(value)
+      : [[defLat, defLng]]
   );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -55,7 +43,7 @@ const LocationShapeInput = ({ value, onChange, name, attribute }) => {
     onChange({
       target: {
         name,
-        value: JSON.stringify(updatedShape),
+        value: convertArrayToGeoJSON(updatedShape),
         type: attribute.type,
       },
     });
@@ -68,7 +56,7 @@ const LocationShapeInput = ({ value, onChange, name, attribute }) => {
     onChange({
       target: {
         name,
-        value: JSON.stringify(updatedShape),
+        value: convertArrayToGeoJSON(updatedShape),
         type: attribute.type,
       },
     });
