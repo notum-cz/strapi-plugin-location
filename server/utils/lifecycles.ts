@@ -26,7 +26,6 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
       await Promise.all(
         locationFields.map(async (locationField) => {
           if (locationField.type === "location") {
-            console.log(event.params.data, locationField);
             const data = event.params.data[locationField.field];
             if (!data?.lng || !data?.lat) return;
 
@@ -42,7 +41,6 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
           if (locationField.type === "shape") {
             const data = event.params.data[locationField.field];
             if (!data) return;
-            console.log(data);
             await db.raw(`
             UPDATE ${model.tableName}
             SET ${_.snakeCase(
@@ -78,7 +76,6 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
           if (locationField.type === "shape") {
             const data = params.data[locationField.field];
             if (!params.where.id || !data) return;
-            console.log(data);
             await db.raw(`
             UPDATE ${model.tableName}
             SET ${_.snakeCase(
