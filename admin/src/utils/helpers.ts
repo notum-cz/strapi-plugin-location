@@ -1,11 +1,13 @@
 export const convertArrayToGeoJSON = (array: [number, number][]) => {
+  const revertedArray = array.map((item) => [item[1], item[0]]);
   return JSON.stringify({
     type: "Polygon",
-    coordinates: [[...array, array[0]]],
+    coordinates: [[...revertedArray, revertedArray[0]]],
   });
 };
 
 export const convertGeoJSONToArray = (geoJSON: string) => {
   const parsed = JSON.parse(geoJSON);
-  return parsed.coordinates[0].slice(0, -1);
+  console.log(geoJSON, parsed.coordinates[0].slice(0, -1));
+  return parsed.coordinates[0].slice(0, -1).map((item) => [item[1], item[0]]);
 };

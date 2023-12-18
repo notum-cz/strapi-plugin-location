@@ -85,7 +85,6 @@ const createFilterMiddleware = (strapi: Strapi) => {
         fieldToFilter,
         mutatedLocationQuery
       );
-      console.log(locationQueryParams, "qp");
 
       if (!locationQueryParams) {
         // TODO: add warning that location query is not valid
@@ -101,7 +100,9 @@ const createFilterMiddleware = (strapi: Strapi) => {
             })
         : null;
       const matchedComponents =
-        isComponentQuery && componentIdPairs
+        isComponentQuery &&
+        componentIdPairs &&
+        fieldType === "plugin::location-plugin.location"
           ? await db(componentModel.tableName)
               .select("id")
               .whereIn(
@@ -114,6 +115,27 @@ const createFilterMiddleware = (strapi: Strapi) => {
         ${_.snakeCase(fieldToFilter)}_geom,
         ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
                 [lng, lat, range ?? 0]
+              )
+          : isComponentQuery &&
+            componentIdPairs &&
+            fieldType === "plugin::location-plugin.location-shape"
+          ? await db(componentModel.tableName)
+              .select("id")
+              .whereIn(
+                "id",
+                componentIdPairs.map((pair) => pair.component_id)
+              )
+              .whereRaw(
+                `ST_Contains(
+              ${_.snakeCase(fieldToFilter)}_geom,
+        ST_SetSRID(ST_GeomFromText('POINT(${lng} ${lat})'), 4326)
+        )
+        OR ST_DWithin(
+          ST_Boundary(${_.snakeCase(fieldToFilter)}_geom),
+          ST_SetSRID(ST_GeomFromText('POINT(${lat} ${lng})'), 4326),
+          ${range ?? 0}
+        )
+        `
               )
           : null;
       const ids =
@@ -141,20 +163,16 @@ const createFilterMiddleware = (strapi: Strapi) => {
                 .whereRaw(
                   `ST_Contains(
                     ${_.snakeCase(fieldToFilter)}_geom,
-              ST_SetSRID(ST_GeomFromText('POINT(${lat} ${lng})'), 4326)
+              ST_SetSRID(ST_GeomFromText('POINT(${lng} ${lat})'), 4326)
               )
               OR ST_DWithin(
-                ST_SetSRID(ST_GeomFromText('POINT(${lat} ${lng})'), 4326),
                 ST_Boundary(${_.snakeCase(fieldToFilter)}_geom),
+                ST_SetSRID(ST_GeomFromText('POINT(${lat} ${lng})'), 4326),
                 ${range ?? 0}
               )
               `
                 )
             ).map((item) => item.id);
-      console.log(`ST_Contains(
-        ${_.snakeCase(fieldToFilter)}_geom,
-  ST_SetSRID(ST_GeomFromText('POINT(${lng} ${lat})'), 4326)
-  )`);
 
       ctx.query = {
         ...ctx.query,

@@ -72,7 +72,7 @@ const LocationShapeInput = ({ value, onChange, name, attribute }) => {
   return (
     <Box>
       <Typography fontWeight="bold" variant="pi">
-        {name} karel
+        {name}
       </Typography>
       <Grid gap={5}>
         {/* <LocationInputForm
