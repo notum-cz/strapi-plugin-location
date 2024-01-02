@@ -44,7 +44,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           ), 4326)
           WHERE (${locationFieldSnakeCase}::json->'lng')::text != 'null' AND
                 (${locationFieldSnakeCase}::json->'lat')::text != 'null' AND
-                ${locationFieldSnakeCase}_geom::text = 'null';
+                ${locationFieldSnakeCase}_geom IS NULL;
           `);
         })
       );
