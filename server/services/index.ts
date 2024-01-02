@@ -8,9 +8,18 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
           value &&
           typeof value === "object" &&
           "customField" in value &&
-          value.customField === "plugin::location-plugin.location"
+          [
+            "plugin::location-plugin.location",
+            "plugin::location-plugin.location-shape",
+          ].includes(value.customField as string)
         ) {
-          return key;
+          return {
+            field: key,
+            type:
+              value.customField === "plugin::location-plugin.location"
+                ? "location"
+                : "shape",
+          };
         } else {
           return false;
         }
@@ -33,7 +42,10 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
               entry &&
               typeof entry === "object" &&
               "customField" in entry &&
-              entry.customField === "plugin::location-plugin.location"
+              [
+                "plugin::location-plugin.location",
+                "plugin::location-plugin.location-shape",
+              ].includes(entry.customField as string)
             ) {
               return true;
             } else {
