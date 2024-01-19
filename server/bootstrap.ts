@@ -21,21 +21,23 @@ export default async ({ strapi }: { strapi: Strapi }) => {
       const locationFields = strapi.services[
         locaitonServiceUid
       ].getLocationFields(model.attributes);
+
       await Promise.all(
         locationFields.map(async (locationField) => {
-          const locationFieldSnakeCase = _.snakeCase(locationField);
+          const locationFieldSnakeCase = _.snakeCase(locationField.field);
           const hasColumn = await db.schema.hasColumn(
             `${tableName}`,
             `${locationFieldSnakeCase}_geom`
           );
-          if (!hasColumn) {
-            await db.raw(`
+          if (locationField.type === "location") {
+            if (!hasColumn) {
+              await db.raw(`
               ALTER TABLE ${tableName}
               ADD COLUMN ${locationFieldSnakeCase}_geom GEOMETRY(Point, 4326);
             `);
-          }
-          // Generate point column field using only a query
-          await db.raw(`
+            }
+            // Generate point column field using only a query
+            await db.raw(`
           UPDATE ${tableName}
           SET ${locationFieldSnakeCase}_geom = ST_SetSRID(ST_MakePoint(
               CAST((${locationFieldSnakeCase}::json->'lng')::text AS DOUBLE PRECISION),
@@ -46,6 +48,26 @@ export default async ({ strapi }: { strapi: Strapi }) => {
                 (${locationFieldSnakeCase}::json->'lat')::text != 'null' AND
                 ${locationFieldSnakeCase}_geom IS NULL;
           `);
+          }
+          if (locationField.type === "shape") {
+            if (!hasColumn) {
+              await db.raw(`
+              ALTER TABLE ${tableName}
+              ADD COLUMN ${locationFieldSnakeCase}_geom GEOMETRY(Polygon, 4326);
+            `);
+            }
+            // Generate point column field using only a query
+            await db.raw(`
+          UPDATE ${tableName}
+          SET ${locationFieldSnakeCase}_geom = ST_SetSRID(
+            ST_GeomFromGeoJSON(${locationFieldSnakeCase}),
+            4326
+        )
+        WHERE ${locationFieldSnakeCase} IS NOT NULL AND ${locationFieldSnakeCase}::text != 'null'
+
+
+          `);
+          }
         })
       );
     })

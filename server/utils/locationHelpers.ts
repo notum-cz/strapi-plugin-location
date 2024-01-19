@@ -11,10 +11,12 @@ export const getLocationQueryParams = (
   model,
   fieldToFilter,
   locationQuery
-): [number | null, number | null, number] | null => {
+): [number | null, number | null, number, string] | null => {
   if (
-    model?.attributes?.[fieldToFilter]?.customField !==
-    "plugin::location-plugin.location"
+    ![
+      "plugin::location-plugin.location",
+      "plugin::location-plugin.location-shape",
+    ].includes(model?.attributes?.[fieldToFilter]?.customField)
   ) {
     return null;
   }
@@ -35,5 +37,5 @@ export const getLocationQueryParams = (
     }
   }
 
-  return [lat, lng, range];
+  return [lat, lng, range, model?.attributes?.[fieldToFilter]?.customField];
 };

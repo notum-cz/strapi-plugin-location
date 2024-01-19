@@ -55,6 +55,16 @@ export default async ({ strapi }: { strapi: Strapi }) => {
       isResizable: true,
     },
   });
+  strapi.customFields.register({
+    name: "location-shape",
+    plugin: pluginId,
+    type: "json",
+    inputSize: {
+      // optional
+      default: 4,
+      isResizable: true,
+    },
+  });
 
   db.destroy();
 };
