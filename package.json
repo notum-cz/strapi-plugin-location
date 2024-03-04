@@ -30,7 +30,7 @@
     "publish:latest": "cd build && npm publish --tag latest"
   },
   "dependencies": {
-    "@strapi/design-system": "^1.6.3",
+    "@strapi/design-system": "^1.15.0",
     "@strapi/helper-plugin": "^4.17.0",
     "@strapi/icons": "^1.6.3",
     "leaflet": "^1.9.4",
