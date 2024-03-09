@@ -1,6 +1,6 @@
 import { Strapi } from "@strapi/strapi";
-import { Event } from "@strapi/database/lib/lifecycles";
-import { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
+import { Event } from "@strapi/database/dist/lifecycles/types";
+import { Subscriber } from "@strapi/database/dist/lifecycles/types";
 import _ from "lodash";
 
 const locaitonServiceUid = "plugin::location-plugin.locationServices";
@@ -11,7 +11,7 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
     strapi.services[locaitonServiceUid].getModelsWithLocation();
 
   return {
-    // @ts-expect-error
+    //@ts-expect-error
     model: modelsWithLocation.map((model) => model.uid),
 
     afterCreate: async (event: Event) => {
@@ -19,7 +19,7 @@ const createSubscriber = (strapi: Strapi): Subscriber => {
       const locationFields = strapi.services[
         locaitonServiceUid
       ].getLocationFields(model.attributes);
-      // @ts-expect-error
+      //@ts-expect-error
       const id = event?.result?.id;
       if (!id) return;
 
