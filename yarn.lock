@@ -1722,15 +1722,10 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/icons@1.16.0":
+"@strapi/icons@1.16.0", "@strapi/icons@^1.16.0":
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.16.0.tgz#0b98dfa805a370423ad945208c07d00962209bd3"
   integrity sha512-sa7MTlhHpbpFCS5ZIlgLQQtG4s5W7ojGFr6CsjwtFdezrvBLbY5ZGmVByghK7b3XoZ1bNYk1AiGdcxMQvCu+vw==
-
-"@strapi/icons@^1.6.3":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.8.0.tgz#ef5585e33ac4ccc9df260fcae790f48e9f2b9f61"
-  integrity sha512-8EkvPUcueIyXOu5vzf01GZibpTeG0xh+jBA0kKO5KJOXPrO8/yMisJgRlOS9e9pGD+kInIzif78A1P7RCQI4wA==
 
 "@strapi/logger@4.20.5":
   version "4.20.5"
