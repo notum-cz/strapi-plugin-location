@@ -1706,10 +1706,26 @@
     plop "2.7.6"
     pluralize "8.0.0"
 
-"@strapi/helper-plugin@4.20.5", "@strapi/helper-plugin@^4.20.5":
+"@strapi/helper-plugin@4.20.5":
   version "4.20.5"
   resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.20.5.tgz#85ae759b945b5a09ebb5ff3b11d532ea223d73ef"
   integrity sha512-ZibDHmvZfFfXoKbK/P2YfeW9cuCBoQj7G3yNWPW+XRdmWsY7FI/zfF8hBD3CbhfHdri/TZjl9wdorzuJ7/ACVQ==
+  dependencies:
+    axios "1.6.0"
+    date-fns "2.30.0"
+    formik "2.4.0"
+    immer "9.0.19"
+    lodash "4.17.21"
+    qs "6.11.1"
+    react-helmet "6.1.0"
+    react-intl "6.4.1"
+    react-query "3.39.3"
+    react-select "5.7.0"
+
+"@strapi/helper-plugin@^4.23.0":
+  version "4.23.0"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.23.0.tgz#44e50d5b2f59355f17c4ffd1cc6493878e0ab6d6"
+  integrity sha512-/Ra+OWFeAK0Zg7TxrpQ0OU3j06Z8sEIEZ7Phsi5dNudnMoAS1Dz//9a8xOSv+G+0pvm7BkL+/6MoYnqFxTiSjg==
   dependencies:
     axios "1.6.0"
     date-fns "2.30.0"
