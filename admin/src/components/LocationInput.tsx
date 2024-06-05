@@ -133,7 +133,7 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
                     handleSetLocation={handleSetLocation}
                   />
                 </Grid>
-                <LocationTextInput setLocation={setLocation} />
+                <LocationTextInput handleSetLocation={handleSetLocation} />
                 <Box paddingTop={6}>
                   <MapContainer
                     center={[lat ? lat : defLat, lng ? lng : defLng]}

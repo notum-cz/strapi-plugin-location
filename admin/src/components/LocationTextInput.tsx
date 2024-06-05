@@ -3,9 +3,9 @@ import { Button, Grid, GridItem, TextInput } from "@strapi/design-system";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 export default function LocationTextInput({
-  setLocation,
+  handleSetLocation,
 }: {
-  setLocation: Dispatch<SetStateAction<number[]>>;
+  handleSetLocation: Dispatch<SetStateAction<number[]>>;
 }) {
   const [address, setAddress] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -22,7 +22,7 @@ export default function LocationTextInput({
         if (val?.length > 0) {
           const firstOccur = val?.[0];
           const { lat: searchLatitude, lon: searchLongitude } = firstOccur;
-          setLocation([searchLatitude, searchLongitude]);
+          handleSetLocation([searchLatitude, searchLongitude]);
           setErrorMsg("");
         } else {
           setErrorMsg("Address not found");
