@@ -38,14 +38,14 @@
     "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.20.5",
+    "@strapi/strapi": "^4.24.5",
     "@strapi/typescript-utils": "^4.24.5",
     "@types/leaflet": "^1.9.8",
-    "@types/react": "^18.2.48",
+    "@types/react": "^18.3.1",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "styled-components": "^5.3.11",
