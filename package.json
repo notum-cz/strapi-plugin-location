@@ -23,11 +23,7 @@
     "Ondřej Mikulčík <ondrej.mikulcik@notum.cz> (https://notum.cz/en/strapi)"
   ],
   "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf build",
-    "develop": "NODE_ENV=development tsc -p tsconfig.server.json -w",
-    "prepublish:latest": "npm run clean && npm run build && node build/setup-package.js",
-    "publish:latest": "cd build && npm publish --tag latest"
+    "develop": "NODE_ENV=development tsc -p tsconfig.server.json -w"
   },
   "dependencies": {
     "@strapi/design-system": "^1.16.0",
