@@ -1984,10 +1984,22 @@
     node-fetch "2.7.0"
     node-schedule "2.1.0"
 
-"@strapi/typescript-utils@4.20.5", "@strapi/typescript-utils@^4.17.0":
+"@strapi/typescript-utils@4.20.5":
   version "4.20.5"
   resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.20.5.tgz#4d03f139c1023fc1301ec31b0132432de04722b8"
   integrity sha512-IXtRy6AhZOYHDBrb+T0bnADoTEXzVQO/rhan1fyz5WAAhBbMsT5NJ7VtuKXf+C3rEi2EX0v/+zHrR4PKFiu6rQ==
+  dependencies:
+    chalk "4.1.2"
+    cli-table3 "0.6.2"
+    fs-extra "10.0.0"
+    lodash "4.17.21"
+    prettier "2.8.4"
+    typescript "5.2.2"
+
+"@strapi/typescript-utils@^4.24.5":
+  version "4.24.5"
+  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.24.5.tgz#a33d63d2da331e70abda3c56e67080711827f478"
+  integrity sha512-xI+5CuRtJjlEaUmeZE+tXP1lX7UfN3XbFHxG7D5zLP7gB2HSG7ai2d0V7XXqbrN7QDVXn8zkFVzZypCDnyTU4g==
   dependencies:
     chalk "4.1.2"
     cli-table3 "0.6.2"
