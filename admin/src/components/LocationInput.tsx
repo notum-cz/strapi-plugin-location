@@ -17,15 +17,16 @@ import {
 } from "@strapi/design-system";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 //@ts-ignore
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 //@ts-ignore
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 //@ts-ignore
 import _ from "lodash";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import LocationInputForm from "./LocationInputForm";
+import LocationTextInput from "./LocationTextInput";
 
 //@ts-ignore
 const icon = L.icon({
@@ -56,6 +57,16 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
   const [defLat, defLng] = [49.195678016117164, 16.608182539182483];
   const [[lat, lng], setLocation] = useState(parseValue(value));
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  function FlyMapTo() {
+    const map = useMap();
+
+    useEffect(() => {
+      map.setView([lat ? lat : defLat, lng ? lng : defLng], 15);
+    }, [lat, lng]);
+
+    return null;
+  }
 
   const markerRef = useRef(null);
 
@@ -122,6 +133,7 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
                     handleSetLocation={handleSetLocation}
                   />
                 </Grid>
+                <LocationTextInput handleSetLocation={handleSetLocation} />
                 <Box paddingTop={6}>
                   <MapContainer
                     center={[lat ? lat : defLat, lng ? lng : defLng]}
@@ -140,6 +152,7 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
                       position={[lat ? lat : defLat, lng ? lng : defLng]}
                       icon={icon}
                     ></Marker>
+                    <FlyMapTo />
                   </MapContainer>
                 </Box>
               </ModalBody>
