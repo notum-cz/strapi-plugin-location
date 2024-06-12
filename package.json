@@ -1,6 +1,6 @@
 {
-  "name": "@trieb.work/strapi-plugin-location",
-  "version": "1.2.12",
+  "name": "@notum-cz/strapi-plugin-location",
+  "version": "1.2.6",
   "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
   "keywords": [
     "strapi",
@@ -23,10 +23,10 @@
     "Ondřej Mikulčík <ondrej.mikulcik@notum.cz> (https://notum.cz/en/strapi)"
   ],
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.server.json",
+    "build": "tsc",
     "clean": "rm -rf build",
     "develop": "NODE_ENV=development tsc -p tsconfig.server.json -w",
-    "prepublish:latest": "npm run clean && npm run build",
+    "prepublish:latest": "npm run clean && npm run build && node build/setup-package.js",
     "publish:latest": "cd build && npm publish --tag latest"
   },
   "dependencies": {
