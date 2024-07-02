@@ -112,7 +112,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
                 `
         ST_DWithin(
         ${_.snakeCase(fieldToFilter)}_geom,
-        ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
+        ST_SetSRID(ST_MakePoint(?, ?), 4326), ?)`,
                 [lng, lat, range ?? 0]
               )
           : null;
@@ -130,7 +130,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
                   `
               ST_DWithin(
               ${_.snakeCase(fieldToFilter)}_geom,
-              ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography, ?)`,
+              ST_SetSRID(ST_MakePoint(?, ?), 4326), ?)`,
                   [lng, lat, range ?? 0]
                 )
             ).map((item) => item.id);
@@ -170,7 +170,7 @@ const createFilterMiddleware = (strapi: Strapi) => {
               const [lat, lng, range] = locationQueryParams;
               return `ST_DWithin(${_.snakeCase(
                 field
-              )}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${
+              )}_geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326), ${
                 range ?? 0
               })`;
             } else {

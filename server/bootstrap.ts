@@ -31,7 +31,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           if (!hasColumn) {
             await db.raw(`
               ALTER TABLE ${tableName}
-              ADD COLUMN ${locationFieldSnakeCase}_geom GEOMETRY(Point, 4326);
+              ADD COLUMN ${locationFieldSnakeCase}_geom GEOGRAPHY(Point, 4326);
             `);
           }
           // Generate point column field using only a query
