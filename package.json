@@ -46,7 +46,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "styled-components": "^5.3.11",
-    "typescript": "5.4.5"
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
     "@strapi/strapi": "4.x"
