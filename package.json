@@ -1,6 +1,6 @@
 {
   "name": "@notum-cz/strapi-plugin-location",
-  "version": "1.3.2",
+  "version": "1.2.8",
   "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
   "keywords": [
     "strapi",
@@ -38,8 +38,8 @@
     "@strapi/strapi": "^4.25.1",
     "@strapi/typescript-utils": "^4.24.5",
     "@types/leaflet": "^1.9.12",
-    "@types/react-dom": "^18.3.0",
     "@types/react": "^18.3.6",
+    "@types/react-dom": "^18.3.0",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "react": "^18.3.1",
