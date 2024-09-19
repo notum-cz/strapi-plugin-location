@@ -20,7 +20,7 @@
   },
   "maintainers": [
     "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.cz/en/strapi)",
-    "Ondřej Mikulčík <ondrej.mikulcik@notum.cz> (https://notum.cz/en/strapi)"
+    "Dominik Juriga <dominik.juriga@notum.cz> (https://notum.cz/en/strapi)"
   ],
   "scripts": {
     "develop": "NODE_ENV=development tsc -p tsconfig.server.json -w"
