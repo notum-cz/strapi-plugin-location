@@ -1758,10 +1758,10 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/helper-plugin@^4.23.1", "@strapi/helper-plugin@^4.25.11":
-  version "4.25.11"
-  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.25.11.tgz#c3f2db2b512a80832ef36391c38352be427d8c87"
-  integrity sha512-9NKVVJTBHiRW7DyrZA6UZXNhTkfX1C90xAqVUwGQrlQRkU5wGOvtEsHMksL+pyfqz19Pm9Bg+gBwiP246dXRJg==
+"@strapi/helper-plugin@^4.23.1", "@strapi/helper-plugin@^4.25.12":
+  version "4.25.12"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.25.12.tgz#50db8649d589b6140f2ed995f81720b5be424bd9"
+  integrity sha512-W4Jl+r0XaLZI1yfIEq/SIjrCiOojSG+x/+A92hK4wgwYlNVd5Iw7oQB8VVj935JQbpFzwQhMGCPrth1NaL7sWg==
   dependencies:
     axios "1.7.4"
     date-fns "2.30.0"
