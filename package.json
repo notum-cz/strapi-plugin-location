@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^4.25.1",
-    "@strapi/typescript-utils": "^4.24.5",
+    "@strapi/typescript-utils": "^5.0.2",
     "@types/leaflet": "^1.9.12",
     "@types/react": "^18.3.6",
     "@types/react-dom": "^18.3.0",
