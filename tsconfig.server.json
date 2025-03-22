@@ -14,6 +14,11 @@
     "custom.d.ts"
   ],
 
+  "files": [
+    // Include the specific file from the admin folder
+    "admin/src/pluginId.ts"
+  ],
+
   "exclude": [
     "node_modules/",
     "dist/",

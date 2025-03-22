@@ -38,13 +38,14 @@ export default async ({ strapi }: { strapi: Strapi }) => {
           await db.raw(`
           UPDATE ${tableName}
           SET ${locationFieldSnakeCase}_geom = ST_SetSRID(ST_MakePoint(
-              CAST((${locationFieldSnakeCase}::json->'lng')::text AS DOUBLE PRECISION),
-              CAST((${locationFieldSnakeCase}::json->'lat')::text AS DOUBLE PRECISION)
-
+              CAST(${locationFieldSnakeCase}::jsonb->>'lng' AS DOUBLE PRECISION),
+              CAST(${locationFieldSnakeCase}::jsonb->>'lat' AS DOUBLE PRECISION)
           ), 4326)
-          WHERE (${locationFieldSnakeCase}::json->'lng')::text != 'null' AND
-                (${locationFieldSnakeCase}::json->'lat')::text != 'null' AND
-                ${locationFieldSnakeCase}_geom IS NULL;
+          WHERE ${locationFieldSnakeCase}::jsonb->>'lng' IS NOT NULL
+            AND ${locationFieldSnakeCase}::jsonb->>'lat' IS NOT NULL
+            AND ${locationFieldSnakeCase}::jsonb->>'lng' != ''
+            AND ${locationFieldSnakeCase}::jsonb->>'lat' != ''
+            AND ${locationFieldSnakeCase}_geom IS NULL;
           `);
         })
       );
