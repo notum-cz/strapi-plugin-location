@@ -1,11 +1,25 @@
 import { Model } from '@strapi/database';
 import type { Core } from '@strapi/strapi';
-import type {} from '@strapi/types';
+import type { } from '@strapi/types';
 import _ from 'lodash';
 import { locationServiceUid } from '../../src/constants';
 
 const createSubscriber = (strapi: Core.Strapi): Model['lifecycles'] => {
   const db = strapi.db.connection;
+
+  const updateGeomField = async (tableName: string, locationField: string, id: string, lng: number, lat: number) => {
+    // Needs to be in a transaction to avoid race condition
+    await strapi.db.transaction(({ onCommit }) => {
+      onCommit(async () => {
+        await db.raw(`
+          UPDATE ${tableName}
+          SET ${_.snakeCase(locationField)}_geom = ST_SetSRID(ST_MakePoint(?::DOUBLE PRECISION, ?::DOUBLE PRECISION), 4326)
+          WHERE id = ?
+        `, [lng, lat, id]);
+      });
+    });
+  }
+
   return {
     afterCreate: async (event) => {
       const { model } = event;
@@ -17,15 +31,9 @@ const createSubscriber = (strapi: Core.Strapi): Model['lifecycles'] => {
         locationFields.map(async (locationField) => {
           const data = event.params.data[locationField];
 
-          if (!data?.lng || !data?.lat) return;
+          if (!data?.lng || !data?.lat) return
 
-          await db.raw(`
-              UPDATE ${model.tableName}
-              SET ${_.snakeCase(
-                locationField
-              )}_geom = ST_SetSRID(ST_MakePoint(${data.lng}, ${data.lat}), 4326)
-              WHERE id = ${id};
-          `);
+          await updateGeomField(model.tableName, locationField, id, data.lng, data.lat);
         })
       );
     },
@@ -39,13 +47,7 @@ const createSubscriber = (strapi: Core.Strapi): Model['lifecycles'] => {
           const data = params.data[locationField];
           if (!params.where.id || !data?.lng || !data?.lat) return;
 
-          await db.raw(`
-            UPDATE ${model.tableName}
-            SET ${_.snakeCase(locationField)}_geom = ST_SetSRID(ST_MakePoint(${
-              data.lng
-            }, ${data.lat}), 4326)
-            WHERE id = ${params.where.id};
-          `);
+          await updateGeomField(model.tableName, locationField, params.where.id, data.lng, data.lat);
         })
       );
     },

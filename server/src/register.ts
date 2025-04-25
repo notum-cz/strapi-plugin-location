@@ -50,7 +50,7 @@ const register = async ({ strapi }: { strapi: Core.Strapi }) => {
   strapi.log.info(`isPostgisAvailable: ${isPostgisAvailable}`);
   if (!isPostgisAvailable) {
     strapi.log.error(`Error accessing POSTGIS I AM HERE`);
-    strapi['location-plugin'].enabled = false;
+    strapi[PLUGIN_ID].enabled = false;
     return;
   }
 
