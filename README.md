@@ -8,6 +8,12 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 
 ⚠️ Filtering by data in relations is not supported.
 
+## We've released v2.x for Strapi V5
+The version 2.x for this plugin is aimed at Strapi V5. If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin. With this upgrade:
+
+- The plugin uses Strapi V5's plugin SDK library `@strapi/sdk-plugin`.
+- The plugin now works based on the `documentId` attribute
+
 ## 🙉 What does the plugin do for you?
 
 - ✅ Provides a custom location input field for latitude and longitude values
