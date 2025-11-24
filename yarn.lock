@@ -1758,12 +1758,12 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/helper-plugin@^4.23.1", "@strapi/helper-plugin@^4.25.11":
-  version "4.25.11"
-  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.25.11.tgz#c3f2db2b512a80832ef36391c38352be427d8c87"
-  integrity sha512-9NKVVJTBHiRW7DyrZA6UZXNhTkfX1C90xAqVUwGQrlQRkU5wGOvtEsHMksL+pyfqz19Pm9Bg+gBwiP246dXRJg==
+"@strapi/helper-plugin@^4.23.1", "@strapi/helper-plugin@^4.25.23":
+  version "4.25.23"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.25.23.tgz#eba79dd63506275e8d57de6b650001293192e6b8"
+  integrity sha512-QYxYQa8cD3RLJw427uTgVtfiVfVbKBMEtBmHLPTZFBJZVOl6p7lG5lEC+c3tUCnz0Hxrf7oQ1uIAlMdEsIXTYA==
   dependencies:
-    axios "1.7.4"
+    axios "1.8.2"
     date-fns "2.30.0"
     formik "2.4.0"
     immer "9.0.19"
@@ -2923,10 +2923,10 @@ axios@1.6.0:
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
-axios@1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.4.tgz#4c8ded1b43683c8dd362973c393f3ede24052aa2"
-  integrity sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==
+axios@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.8.2.tgz#fabe06e241dfe83071d4edfbcaa7b1c3a40f7979"
+  integrity sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
