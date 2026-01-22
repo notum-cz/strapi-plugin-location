@@ -1,11 +1,11 @@
 
-import { Button, Grid, GridItem, TextInput } from "@strapi/design-system";
+import { Button, Box, Grid, TextInput, Field, Flex } from "@strapi/design-system";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 export default function LocationTextInput({
   handleSetLocation,
 }: {
-  handleSetLocation: Dispatch<SetStateAction<number[]>>;
+  handleSetLocation: (newValue: [number | null, number | null]) => void;
 }) {
   const [address, setAddress] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,38 +35,32 @@ export default function LocationTextInput({
   };
 
   return (
-    <Grid gap={5} style={{ padding: "16px 0" }}>
-      <GridItem col={10}>
-        <TextInput
-          placeholder="insert your address"
-          label="Address"
-          name="address"
-          style={{ width: "100%", flexGrow: 1 }}
-          onChange={(e) => {
-            setAddress(e?.target?.value);
-          }}
-          {...(errorMsg && { error: errorMsg })}
-        />
-      </GridItem>
-      <GridItem
-        col={2}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingTop: "24px",
-        }}
-      >
-        <Button
-          variant="default"
-          fullWidth
-          loading={loading}
-          onClick={async () => {
-            await fetchData();
-          }}
-        >
-          Send
-        </Button>
-      </GridItem>
-    </Grid>
+    <>
+        <Grid.Root gridCols={12} marginTop={4}>
+          <Grid.Item col={10}>
+            <Box style={{ width: '100%' }} marginRight={2}>
+              <TextInput
+                placeholder="Type your address"
+                label="Address"
+                name="address"
+                onChange={(e: any) => {
+                  setAddress(e?.target?.value);
+                }}
+                {...(errorMsg && { error: errorMsg })}
+              />
+            </Box>
+            </Grid.Item>
+            <Grid.Item col={2}>
+              <Button
+                fullWidth
+                variant="default"
+                loading={loading}
+                onClick={async () => {
+                  await fetchData();
+                }}
+              >Send</Button>
+          </Grid.Item>
+        </Grid.Root>
+    </>
   );
 }

@@ -1,3 +1,1 @@
-const pluginId = "location-plugin";
-
-export default pluginId;
+export const PLUGIN_ID = 'location-plugin';

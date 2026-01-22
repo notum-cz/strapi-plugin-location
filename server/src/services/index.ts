@@ -1,6 +1,6 @@
-import { Strapi } from "@strapi/strapi";
+import { Core } from "@strapi/strapi";
 
-const locationServices = ({ strapi }: { strapi: Strapi }) => ({
+const locationServices = ({ strapi }: { strapi: Core.Strapi }) => ({
   getLocationFields: (modelAttributes: any) => {
     return Object.entries(modelAttributes)
       .map(([key, value]) => {
@@ -18,7 +18,7 @@ const locationServices = ({ strapi }: { strapi: Strapi }) => ({
       .filter(Boolean);
   },
   getModelsWithLocation: () => {
-    return strapi.db.config.models
+    return Object.values(strapi.contentTypes)
       .filter(
         (model) =>
           (model.uid as string).startsWith("api::") ||
