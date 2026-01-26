@@ -2581,10 +2581,10 @@
     lodash "4.17.21"
     react-remove-scroll "2.5.10"
 
-"@strapi/design-system@^2.0.0-rc.30":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-2.0.1.tgz#0b66cf32a34bc9440a51d2fbbf2188bc357d8454"
-  integrity sha512-Yuk64klpzwg8bqQS/n+IblMNzhlwOu+7w8CBIkghJjNZ9OiOQcFGi153xRncfubFQhxCOPwZuhMhYs/CZwV1NQ==
+"@strapi/design-system@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-2.1.2.tgz#cb40ce5bc4bce7d49c4ee2b1cef715c98cfa6566"
+  integrity sha512-0EFhstDnQeXC2wuxKdyguo/7l1kswfXvBq/mZYguzisiAqJ0QhCRHPuoTgVkkB59npAZEY7jSFMTb20XKa8jIg==
   dependencies:
     "@codemirror/lang-json" "6.0.1"
     "@floating-ui/react-dom" "2.1.0"
@@ -2607,7 +2607,7 @@
     "@radix-ui/react-tabs" "1.0.4"
     "@radix-ui/react-tooltip" "1.0.7"
     "@radix-ui/react-use-callback-ref" "1.0.1"
-    "@strapi/ui-primitives" "2.0.1"
+    "@strapi/ui-primitives" "2.1.2"
     "@uiw/react-codemirror" "4.22.2"
     lodash "4.17.21"
     react-remove-scroll "2.5.10"
@@ -2911,10 +2911,10 @@
     aria-hidden "1.2.4"
     react-remove-scroll "2.5.10"
 
-"@strapi/ui-primitives@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@strapi/ui-primitives/-/ui-primitives-2.0.1.tgz#48304158d7b6d6751453100025dff080f1cee382"
-  integrity sha512-WfdTaDOJ7hFGp7+fcaTdqBF+evOGiqND3I/ajZHzjGDBiasQlCVsbJwZ6VztxRKhgC+XaiOB1m2CxIzn6ilm6w==
+"@strapi/ui-primitives@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@strapi/ui-primitives/-/ui-primitives-2.1.2.tgz#9451307e41c7bad9cd33115f156b1cf10846eb27"
+  integrity sha512-9PLnqJjWBSFlWmZdz0zLcgOhda6tIF/6tu8ZoX7JudlAg9gv8KElEHR0ZbACuH/+b+8BBpQ5fU7rcnMJyK6lJg==
   dependencies:
     "@radix-ui/number" "1.0.1"
     "@radix-ui/primitive" "1.0.1"
