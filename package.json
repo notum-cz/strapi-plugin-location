@@ -21,7 +21,7 @@
   "maintainers": [
     "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.cz/en/strapi)",
     "Dominik Juriga <dominik.juriga@notum.cz> (https://notum.cz/en/strapi)"
-  ],  
+  ],
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
@@ -52,16 +52,16 @@
     "test:ts:back": "run -T tsc -p server/tsconfig.json"
   },
   "dependencies": {
-    "@strapi/design-system": "^2.0.0-rc.30",
-    "@strapi/icons": "^2.0.0-rc.30",
+    "@strapi/design-system": "^2.1.2",
+    "@strapi/icons": "^2.1.2",
     "leaflet": "^1.9.4",
     "react-intl": "^7.1.14",
     "react-leaflet": "4.2.1"
   },
   "devDependencies": {
-    "@strapi/sdk-plugin": "^5.3.2",
-    "@strapi/strapi": "^5.31.0",
-    "@strapi/typescript-utils": "^5.31.0",
+    "@strapi/sdk-plugin": "^5.4.0",
+    "@strapi/strapi": "^5.33.4",
+    "@strapi/typescript-utils": "^5.33.4",
     "@types/leaflet": "^1.9.21",
     "@types/minimatch": "^5.1.2",
     "@types/react": "^19.2.6",
@@ -75,8 +75,8 @@
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "@strapi/sdk-plugin": "^5.3.2",
-    "@strapi/strapi": "^5.31.0",
+    "@strapi/sdk-plugin": "^5.4.0",
+    "@strapi/strapi": "^5.33.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.2",
