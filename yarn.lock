@@ -2656,10 +2656,15 @@
     yup "0.32.9"
     zod "3.25.67"
 
-"@strapi/icons@2.1.2", "@strapi/icons@^2.1.2":
+"@strapi/icons@2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-2.1.2.tgz#019cd6b62bd18f1827fad48dce15733892440013"
   integrity sha512-RnVKuhO8gCWbpIjIs0Qfm0rmOLUrvmCR33AHHClwi7L5i9UwTqVG8ajRPVGptG2dC5vA6JCigsVPAS6yXjUTHQ==
+
+"@strapi/icons@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-2.2.0.tgz#fe574fb26c991665a9bfc900c49afdf23a479add"
+  integrity sha512-wVItrWIDYtvGpv1S5Lg580b5PXH2iw6dgcFnri5vVz4qZDP6ZOTpLmkwZybkfZcpIzq1KkjKyA1JZ6NLBE59cQ==
 
 "@strapi/logger@5.33.4":
   version "5.33.4"

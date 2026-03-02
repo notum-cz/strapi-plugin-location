@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@strapi/design-system": "^2.1.2",
-    "@strapi/icons": "^2.1.2",
+    "@strapi/icons": "^2.2.0",
     "leaflet": "^1.9.4",
     "react-intl": "^7.1.14",
     "react-leaflet": "4.2.1"
