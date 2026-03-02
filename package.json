@@ -52,7 +52,7 @@
     "test:ts:back": "run -T tsc -p server/tsconfig.json"
   },
   "dependencies": {
-    "@strapi/design-system": "^2.1.2",
+    "@strapi/design-system": "^2.2.0",
     "@strapi/icons": "^2.1.2",
     "leaflet": "^1.9.4",
     "react-intl": "^7.1.14",
