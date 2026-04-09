@@ -20,9 +20,9 @@ const LocationInputForm = ({
         <Box style={{ width: "100%" }}>
           <NumberInput
             placeholder="Lat"
-            value={lat ? lat : 0}
+            value={lat ?? 0}
             onValueChange={(newValue: number | undefined) =>
-              handleSetLocation([newValue ?? 0, lng])
+              handleSetLocation([newValue ?? null, lng])
             }
           />
         </Box>
@@ -33,9 +33,9 @@ const LocationInputForm = ({
       <Grid.Item col={displayingInModal ? 3 : 8}>
         <NumberInput
           placeholder="Lng"
-          value={lng ? lng : 0}
+          value={lng ?? 0}
           onValueChange={(newValue: number | undefined) =>
-            handleSetLocation([lat, newValue ?? 0])
+            handleSetLocation([lat, newValue ?? null])
           }
         />
       </Grid.Item>
