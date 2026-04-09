@@ -53,14 +53,14 @@
   },
   "dependencies": {
     "@strapi/design-system": "^2.2.0",
-    "@strapi/icons": "^2.1.2",
+    "@strapi/icons": "^2.2.0",
     "leaflet": "^1.9.4",
     "react-intl": "^7.1.14",
     "react-leaflet": "4.2.1"
   },
   "devDependencies": {
     "@strapi/sdk-plugin": "^5.4.0",
-    "@strapi/strapi": "^5.33.4",
+    "@strapi/strapi": "^5.36.0",
     "@strapi/typescript-utils": "^5.33.4",
     "@types/leaflet": "^1.9.21",
     "@types/minimatch": "^6.0.0",
