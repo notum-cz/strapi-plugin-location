@@ -14,32 +14,28 @@ const LocationInputForm = ({
   return (
     <Grid.Root gridCols={12} gap={5}>
       <Grid.Item col={displayingInModal ? 1 : 4}>
-        <Typography variant="pi">
-          Latitude
-        </Typography>
+        <Typography variant="pi">Latitude</Typography>
       </Grid.Item>
       <Grid.Item col={displayingInModal ? 3 : 8}>
-        <Box style={{ width: '100%' }}>
-      <NumberInput
-          label="Lat"
-          value={lat ? lat : 0}
-          onValueChange={(newValue: number) =>
-            handleSetLocation([newValue, lng])
-          }
-        />
+        <Box style={{ width: "100%" }}>
+          <NumberInput
+            placeholder="Lat"
+            value={lat ? lat : 0}
+            onValueChange={(newValue: number | undefined) =>
+              handleSetLocation([newValue ?? 0, lng])
+            }
+          />
         </Box>
       </Grid.Item>
       <Grid.Item col={displayingInModal ? 1 : 4}>
-      <Typography variant="pi">
-          Longitude
-        </Typography>
+        <Typography variant="pi">Longitude</Typography>
       </Grid.Item>
       <Grid.Item col={displayingInModal ? 3 : 8}>
         <NumberInput
-          label="Lng"
+          placeholder="Lng"
           value={lng ? lng : 0}
-          onValueChange={(newValue: number) =>
-            handleSetLocation([lat, newValue])
+          onValueChange={(newValue: number | undefined) =>
+            handleSetLocation([lat, newValue ?? 0])
           }
         />
       </Grid.Item>
