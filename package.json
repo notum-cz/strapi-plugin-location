@@ -71,7 +71,7 @@
     "react-dom": "^18.3.1",
     "react-leaflet": "4.2.1",
     "react-router-dom": "^6.30.2",
-    "styled-components": "^6.1.19",
+    "styled-components": "^6.4.0",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
@@ -80,7 +80,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.2",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.4.0"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
