@@ -55,7 +55,7 @@
     "@strapi/design-system": "^2.1.2",
     "@strapi/icons": "^2.1.2",
     "leaflet": "^1.9.4",
-    "react-intl": "^7.1.14",
+    "react-intl": "^8.0.11",
     "react-leaflet": "4.2.1"
   },
   "devDependencies": {
