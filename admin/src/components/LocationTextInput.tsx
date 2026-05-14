@@ -1,6 +1,5 @@
-
-import { Button, Box, Grid, TextInput, Field, Flex } from "@strapi/design-system";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Button, Box, Grid, TextInput } from "@strapi/design-system";
+import { useState } from "react";
 
 export default function LocationTextInput({
   handleSetLocation,
@@ -14,7 +13,7 @@ export default function LocationTextInput({
   const fetchData = async () => {
     setLoading(true);
     const url = encodeURI(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${address}`
+      `https://nominatim.openstreetmap.org/search?format=json&q=${address}`,
     );
     return await fetch(url)
       .then((val) => val.json())
@@ -29,38 +28,39 @@ export default function LocationTextInput({
         }
       })
       .catch(() => {
-        setErrorMsg("request error")
+        setErrorMsg("request error");
       })
       .finally(() => setLoading(false));
   };
 
   return (
     <>
-        <Grid.Root gridCols={12} marginTop={4}>
-          <Grid.Item col={10}>
-            <Box style={{ width: '100%' }} marginRight={2}>
-              <TextInput
-                placeholder="Type your address"
-                label="Address"
-                name="address"
-                onChange={(e: any) => {
-                  setAddress(e?.target?.value);
-                }}
-                {...(errorMsg && { error: errorMsg })}
-              />
-            </Box>
-            </Grid.Item>
-            <Grid.Item col={2}>
-              <Button
-                fullWidth
-                variant="default"
-                loading={loading}
-                onClick={async () => {
-                  await fetchData();
-                }}
-              >Send</Button>
-          </Grid.Item>
-        </Grid.Root>
+      <Grid.Root gridCols={12} marginTop={4}>
+        <Grid.Item col={10}>
+          <Box style={{ width: "100%" }} marginRight={2}>
+            <TextInput
+              placeholder="Type your address"
+              name="address"
+              onChange={(e: any) => {
+                setAddress(e?.target?.value);
+              }}
+              {...(errorMsg && { error: errorMsg })}
+            />
+          </Box>
+        </Grid.Item>
+        <Grid.Item col={2}>
+          <Button
+            fullWidth
+            variant="default"
+            loading={loading}
+            onClick={async () => {
+              await fetchData();
+            }}
+          >
+            Send
+          </Button>
+        </Grid.Item>
+      </Grid.Root>
     </>
   );
 }

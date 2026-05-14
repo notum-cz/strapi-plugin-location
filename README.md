@@ -9,6 +9,7 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 ⚠️ Filtering by data in relations is not supported.
 
 ## We've released v2.x for Strapi V5
+
 The version 2.x for this plugin is aimed at Strapi V5. If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin. With this upgrade:
 
 - The plugin uses Strapi V5's plugin SDK library `@strapi/sdk-plugin`.
@@ -29,9 +30,11 @@ The version 2.x for this plugin is aimed at Strapi V5. If you need to use this p
 ```
 npm i @notum-cz/strapi-plugin-location
 ```
+
 ```
 yarn add @notum-cz/strapi-plugin-location
 ```
+
 2. Create or modify file `config/plugins.js` and include the following code snippet:
 
 ```
@@ -41,6 +44,7 @@ module.exports = ({ env }) => ({
 	},
 });
 ```
+
 3. run `npm build` or `yarn build` to get the plugin activated in the admin UI
 4. extend `config/middlewares.js` as shown in this example:
 
@@ -80,45 +84,52 @@ export default [
   "strapi::public",
 ];
 ```
-## ⚙️ Usage
- - To use a custom input field for latitude and longitude go to the Content-type-builder of your application –> select a desired content-type -> click add another field -> select Cutstom tab -> name the field and hit the save button.
- - To search or filter items based on their location use url parameter `location` in the following formats.
 
-For example for a content-type named *Restaurant* with a field *coords* containing the coordinates the url with the location query would be:
+## ⚙️ Usage
+
+- To use a custom input field for latitude and longitude go to the Content-type-builder of your application –> select a desired content-type -> click add another field -> select Cutstom tab -> name the field and hit the save button.
+- To search or filter items based on their location use url parameter `location` in the following formats.
+
+For example for a content-type named _Restaurant_ with a field _coords_ containing the coordinates the url with the location query would be:
 
 `localhost:1337/api/restaurants?$location[coords]=49.200949303006055,16.623833585841673,5000`
 
-This will return a list of restaurants within 5000m of the point specified by the coordinates. **Replace the collection name *restaurant* and the field name *coords* with the name of your collection name and the field containing the coordinates**. The last number (5000) is range and is not required.
+This will return a list of restaurants within 5000m of the point specified by the coordinates. **Replace the collection name _restaurant_ and the field name _coords_ with the name of your collection name and the field containing the coordinates**. The last number (5000) is range and is not required.
 Also this format is supported:
 
 `localhost:1337/api/restaurants?$location[coords][lat]=49.200949303006055&$location[coords][lng]=16.623833585841673`
 
 ## 🛣️ Road map
+
 Are any of these features significant to you? Please show your support by giving a thumbs up on the linked issues. This will help us assess their priority on the roadmap.
+
 ### Q4 2023
+
 - ✨ [Geolocation shape field](https://github.com/notum-cz/strapi-plugin-location/issues/44)
 - ✨ [MySQL support](https://github.com/notum-cz/strapi-plugin-location/issues/31)
-### Q1 2024 
+
+### Q1 2024
+
 - ✨ [GraphQL support](https://github.com/notum-cz/strapi-plugin-location/issues/46)
 - ✨ [Reverse geocoding](https://github.com/notum-cz/strapi-plugin-location/issues/45)
-  
+
 ## 🐛 Bugs
 
 We manage bugs through [GitHub Issues](https://github.com/notum-cz/strapi-plugin-location/issues). <br>
-If you're interested in helping us, you would be a rock  ⭐.
+If you're interested in helping us, you would be a rock ⭐.
 
 ## 🧔 Authors
 
 The main star: **Dominik Míček** https://github.com/Ballonek <br>
 Original Maintainer: **Ondřej Mikulčík** https://github.com/omikulcik <br>
-Active Maintainer: **Ondřej Mikulčík** https://github.com/dominik-juriga <br>
+Active Maintainer: **Filip Ónodi** https://github.com/fonodi <br>
 Project owner: **Ondřej Janošík** <br>
 
 Wanna be here? Open an issue (and solve it), PR or share improvement idea and you will become a listed contributor.
 
 ## 💬 Community
 
-Join our [Discord server](https://discord.gg/hZRCcfWq) to discuss new features, implementation challenges or anything related to this plugin.  
+Join our [Discord server](https://discord.gg/hZRCcfWq) to discuss new features, implementation challenges or anything related to this plugin.
 
 ## 🚀 Created with passion by [Notum Technologies](https://notum.cz/en)
 
