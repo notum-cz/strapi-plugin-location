@@ -115,6 +115,7 @@ const LocationInput = ({ value, onChange, name, attribute }) => {
                     <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      referrerPolicy="strict-origin-when-cross-origin"
                     />
                     <Marker
                       draggable
