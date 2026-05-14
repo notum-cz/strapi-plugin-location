@@ -1,11 +1,13 @@
 {
   "name": "@notum-cz/strapi-plugin-location",
   "version": "2.0.0",
-  "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
+  "description": "Strapi PostGIS Location Input Plugin",
   "keywords": [
     "strapi",
     "plugin",
-    "location"
+    "location",
+    "leaflet",
+    "postgis"
   ],
   "bugs": {
     "url": "https://github.com/notum-cz/strapi-plugin-location/issues"
@@ -14,14 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/notum-cz/strapi-plugin-location.git"
   },
-  "license": "SEE LICENSE IN LICENSE",
-  "author": {
-    "name": "Dominik Míček <dominik.micek@notum.cz> (https://notum.cz/en/strapi)"
-  },
+  "license": "MIT",
+  "author": "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.tech)",
   "maintainers": [
-    "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.cz/en/strapi)",
-    "Dominik Juriga <dominik.juriga@notum.cz> (https://notum.cz/en/strapi)"
+    "Notum Technologies s.r.o. <sales@notum.cz>",
+    "Filip Ónodi <filip.onodi@notum.cz>"
   ],
+  "homepage": "https://github.com/notum-cz/strapi-plugin-location#readme",
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
@@ -86,8 +87,9 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
+    "kind": "plugin",
+    "displayName": "Location",
     "name": "location-plugin",
-    "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
-    "kind": "plugin"
+    "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location."
   }
 }
