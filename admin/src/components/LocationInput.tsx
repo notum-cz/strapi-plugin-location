@@ -1,3 +1,4 @@
+/// <reference path="../../custom.d.ts" />
 /**
  *
  * LocationInput
@@ -9,12 +10,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "../leaflet.css";
 import { useEffect, useMemo, useRef, useState } from "react";
-//@ts-ignore
 import markerIcon from "leaflet/dist/images/marker-icon.png";
-//@ts-ignore
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
-//@ts-ignore
-import _ from "lodash";
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import LocationInputForm from "./LocationInputForm";
 import LocationTextInput from "./LocationTextInput";
@@ -31,17 +28,10 @@ const parseValue = (value: {
   lat: number | null;
   lng: number | null;
 }): [number | null, number | null] => {
-  try {
-    if (!value?.lat || !value?.lng) {
-      return [null, null];
-    }
-    return [
-      _.pick(value, ["lat", "lng"]).lat,
-      _.pick(value, ["lat", "lng"]).lng,
-    ];
-  } catch (error) {
+  if (value?.lat == null || value?.lng == null) {
     return [null, null];
   }
+  return [value.lat, value.lng];
 };
 
 //@ts-ignore
