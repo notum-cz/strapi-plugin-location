@@ -90,6 +90,16 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 - **Same-location search** — find entries sharing a set of coordinates
 - Built for **Strapi V5** with `@strapi/sdk-plugin`, working against the `documentId` attribute
 
+<!-- Screenshots -->
+
+### Screenshots
+
+<div align="center"> 
+  <picture>
+    <img src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/location-plugin-mockup.png" alt="Strapi Plugin TipTap Editor Interface" />
+  </picture>
+</div>
+
 ## We've released v2.x for Strapi V5
 
 The version 2.x for this plugin is aimed at Strapi V5. If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin. With this upgrade:
