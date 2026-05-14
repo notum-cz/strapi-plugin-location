@@ -1,12 +1,94 @@
-# Strapi Plugin Location
+<div align="center">
+  <picture>
+    <img src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/notum-location-icon.png" height="250" alt="Notum Tiptap Plugin Logo"/>
+  </picture>
 
-This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.
+  <h1>TipTap Editor Plugin for Strapi V5</h1>
+  <p>by<br />
+  <a href="https://notum.tech/?utm_source=strapi-plugin&utm_medium=github&utm_campaign=location-readme">
+    <img style="margin-top: 0.5rem" src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/notum-logo.svg" alt="Notum Technologies" />
+  </a>
+  </p>
+
+  <p>
+    A Strapi plugin for location-based inputs with PostGIS geometry storage. <br />
+    Capture coordinates, filter by location, all backed by spatial types.
+  </p>
+
+  <!-- Badges -->
+  <p>
+    <a
+      href="https://github.com/notum-cz/strapi-plugin-location/graphs/contributors"
+    >
+      <img
+        src="https://img.shields.io/github/contributors/notum-cz/strapi-plugin-location"
+        alt="contributors"
+      />
+    </a>
+    <a href="https://github.com/notum-cz/strapi-plugin-location/commits">
+      <img
+        src="https://img.shields.io/github/last-commit/notum-cz/strapi-plugin-location"
+        alt="last update"
+      />
+    </a>
+    <a href="https://github.com/notum-cz/strapi-plugin-location/issues/">
+      <img
+        src="https://img.shields.io/github/issues/notum-cz/strapi-plugin-location"
+        alt="open issues"
+      />
+    </a>
+    <a
+      href="https://github.com/notum-cz/strapi-plugin-location/blob/main/LICENSE"
+    >
+      <img
+        src="https://img.shields.io/github/license/notum-cz/strapi-plugin-location"
+        alt="license"
+      />
+    </a>
+    <a
+      href="https://github.com/notum-cz/strapi-plugin-location/stargazers"
+    >
+      <img
+        src="https://img.shields.io/github/stars/notum-cz/strapi-plugin-location"
+        alt="stars"
+      />
+    </a>
+  </p>
+
+  <h4>
+    <a href="https://github.com/notum-cz/strapi-plugin-location/issues/"
+      >Report Bug or Request Feature</a
+    >
+  </h4>
+</div>
+
+<br />
+
+<!-- Table of Contents -->
 
 ## Caution 🖐⚠️
 
 This plugin requires a PostgreSQL database with the PostGIS extension enabled (can be used on that database plugin will enable it for you if it can). Make sure you have a compatible database set up before using this plugin. For development I used postgis docker image from here: https://registry.hub.docker.com/r/postgis/postgis/
 
 ⚠️ Filtering by data in relations is not supported.
+
+<!-- About the Project -->
+
+## About the Project
+
+<!-- Features -->
+
+### Features
+
+- **Custom location field** for capturing latitude and longitude values, registered as a Strapi custom field
+- **Interactive map** powered by [Leaflet](https://leafletjs.com/) and OpenStreetMap tiles — no Google Maps API key required
+- **Draggable marker** to fine-tune coordinates directly on the map
+- **Manual coordinate input** for entering latitude and longitude by hand
+- **PostGIS geometry storage** — coordinates are persisted as spatial `geometry` types; the plugin enables the PostGIS extension automatically when possible
+- **Location-based filtering** of entries via the `$location` query parameter
+- **Radius search** — find entries within a given distance of a point
+- **Same-location search** — find entries sharing a set of coordinates
+- Built for **Strapi V5** with `@strapi/sdk-plugin`, working against the `documentId` attribute
 
 ## We've released v2.x for Strapi V5
 
