@@ -70,7 +70,7 @@
     "react-dom": "^18.3.1",
     "react-leaflet": "4.2.1",
     "react-router-dom": "^6.30.3",
-    "styled-components": "^6.3.8",
+    "styled-components": "^6.4.0",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
@@ -79,12 +79,13 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.3",
-    "styled-components": "^6.3.8"
+    "styled-components": "^6.4.0"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
+  "packageManager": "yarn@1.22.22",
   "strapi": {
     "name": "location-plugin",
     "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
