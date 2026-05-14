@@ -4,6 +4,7 @@
   "compilerOptions": {
     "rootDir": "../",
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types/*"]
+    "typeRoots": ["./node_modules/@types/*"],
+    "ignoreDeprecations": "6.0"
   }
 }
