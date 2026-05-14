@@ -1,12 +1,5 @@
-import {
-  Button,
-  Box,
-  Grid,
-  TextInput,
-  Field,
-  Flex,
-} from "@strapi/design-system";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Button, Box, Grid, TextInput } from "@strapi/design-system";
+import { useState } from "react";
 
 export default function LocationTextInput({
   handleSetLocation,
