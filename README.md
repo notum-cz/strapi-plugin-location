@@ -3,7 +3,7 @@
     <img src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/notum-location-icon.png" height="250" alt="Notum Tiptap Plugin Logo"/>
   </picture>
 
-  <h1>TipTap Editor Plugin for Strapi V5</h1>
+  <h1>PostGIS Location Plugin</h1>
   <p>by<br />
   <a href="https://notum.tech/?utm_source=strapi-plugin&utm_medium=github&utm_campaign=location-readme">
     <img style="margin-top: 0.5rem" src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/notum-logo.svg" alt="Notum Technologies" />
@@ -38,7 +38,7 @@
       />
     </a>
     <a
-      href="https://github.com/notum-cz/strapi-plugin-location/blob/main/LICENSE"
+      href="https://github.com/notum-cz/strapi-plugin-location/blob/new-readme/LICENSE"
     >
       <img
         src="https://img.shields.io/github/license/notum-cz/strapi-plugin-location"
@@ -66,7 +66,27 @@
 
 <!-- Table of Contents -->
 
-## Caution 🖐⚠️
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+  - [⚠️ Caution](#️-caution)
+  - [About the Project](#about-the-project)
+    - [Features](#features)
+    - [Screenshots](#screenshots)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+      - [1. Install the plugin via npm or yarn](#1-install-the-plugin-via-npm-or-yarn)
+      - [2. Enable the plugin](#2-enable-the-plugin)
+      - [3. Configure middleware](#3-configure-middleware)
+      - [4. Rebuild Strapi and test the plugin](#4-rebuild-strapi-and-test-the-plugin)
+  - [Usage](#usage)
+  - [🤝 Community](#-community)
+    - [Maintained by Notum Technologies](#maintained-by-notum-technologies)
+      - [Current maintainer](#current-maintainer)
+      - [Contributors](#contributors)
+    - [Contributing](#contributing)
+
+## ⚠️ Caution
 
 This plugin requires a PostgreSQL database with the PostGIS extension enabled (can be used on that database plugin will enable it for you if it can). Make sure you have a compatible database set up before using this plugin. For development I used postgis docker image from here: https://registry.hub.docker.com/r/postgis/postgis/
 
@@ -96,51 +116,47 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 
 <div align="center"> 
   <picture>
-    <img src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/location-plugin-mockup.png" alt="Strapi Plugin TipTap Editor Interface" />
+    <img src="https://raw.githubusercontent.com/notum-cz/strapi-plugin-location/main/assets/location-plugin-mockup.png" alt="Strapi Plugin Location Interface" />
   </picture>
 </div>
 
-## We've released v2.x for Strapi V5
+<!-- Getting Started -->
 
-The version 2.x for this plugin is aimed at Strapi V5. If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin. With this upgrade:
+## Getting Started
 
-- The plugin uses Strapi V5's plugin SDK library `@strapi/sdk-plugin`.
-- The plugin now works based on the `documentId` attribute
+If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin.
 
-## 🙉 What does the plugin do for you?
+<!-- Installation -->
 
-- ✅ Provides a custom location input field for latitude and longitude values
-- ✅ Display the location on a map and fine-tune it by moving a marker using drag-and-drop functionality, all without the need for a Google Maps API key.
-- ✅ Handles storage of location values as geometry types in a PostGIS database
-- ✅ Allows filtering of items based on their location
-- ✅ Enables searching for items with the same location or within a specified range
+### Installation
 
-## 🧑‍💻 Installation
+#### 1. Install the plugin via npm or yarn
 
-1. Install the package with your preferred package manager using one of the commands bellow:
-
-```
+```bash
+# NPM
 npm i @notum-cz/strapi-plugin-location
-```
 
-```
+# Yarn
 yarn add @notum-cz/strapi-plugin-location
 ```
 
-2. Create or modify file `config/plugins.js` and include the following code snippet:
+#### 2. Enable the plugin
 
-```
+Create or modify `config/plugins.js` (or `config/plugins.ts`):
+
+```ts
 module.exports = ({ env }) => ({
-	"location-plugin": {
-		enabled:  true,
-	},
+  "location-plugin": {
+    enabled: true,
+  },
 });
 ```
 
-3. run `npm build` or `yarn build` to get the plugin activated in the admin UI
-4. extend `config/middlewares.js` as shown in this example:
+#### 3. Configure middleware
 
-```
+Extend `config/middlewares.js` to allow OpenStreetMap tile sources:
+
+```ts
 export default [
   "strapi::errors",
   {
@@ -177,9 +193,16 @@ export default [
 ];
 ```
 
-## ⚙️ Usage
+#### 4. Rebuild Strapi and test the plugin
 
-- To use a custom input field for latitude and longitude go to the Content-type-builder of your application –> select a desired content-type -> click add another field -> select Cutstom tab -> name the field and hit the save button.
+```bash
+  yarn build
+  yarn start
+```
+
+## Usage
+
+- To use a custom input field for latitude and longitude go to the Content-type-builder of your application –> select a desired content-type -> click add another field -> select Custom tab -> name the field and hit the save button.
 - To search or filter items based on their location use url parameter `location` in the following formats.
 
 For example for a content-type named _Restaurant_ with a field _coords_ containing the coordinates the url with the location query would be:
@@ -191,45 +214,25 @@ Also this format is supported:
 
 `localhost:1337/api/restaurants?$location[coords][lat]=49.200949303006055&$location[coords][lng]=16.623833585841673`
 
-## 🛣️ Road map
+## 🤝 Community
 
-Are any of these features significant to you? Please show your support by giving a thumbs up on the linked issues. This will help us assess their priority on the roadmap.
+### Maintained by [Notum Technologies](https://notum.tech/?utm_source=strapi-plugin&utm_medium=github&utm_campaign=location-readme)
 
-### Q4 2023
+Built and maintained by [Notum Technologies](https://notum.tech/?utm_source=strapi-plugin&utm_medium=github&utm_campaign=location-readme), a Czech-based Strapi Enterprise Partner with a passion for open-source tooling.
 
-- ✨ [Geolocation shape field](https://github.com/notum-cz/strapi-plugin-location/issues/44)
-- ✨ [MySQL support](https://github.com/notum-cz/strapi-plugin-location/issues/31)
+#### Current maintainer
 
-### Q1 2024
+[Filip Ónodi](https://github.com/fonodi)
 
-- ✨ [GraphQL support](https://github.com/notum-cz/strapi-plugin-location/issues/46)
-- ✨ [Reverse geocoding](https://github.com/notum-cz/strapi-plugin-location/issues/45)
+#### Contributors
 
-## 🐛 Bugs
+<a href="https://github.com/notum-cz/strapi-plugin-location/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=notum-cz/strapi-plugin-location" alt="Contributors" />
+</a>
 
-We manage bugs through [GitHub Issues](https://github.com/notum-cz/strapi-plugin-location/issues). <br>
-If you're interested in helping us, you would be a rock ⭐.
+### Contributing
 
-## 🧔 Authors
+Contributions of all kinds are welcome: code, documentation, bug reports, and feature ideas.
+<br> <br> Browse the [open issues](https://github.com/notum-cz/strapi-plugin-location/issues) to find something to work on, or open a new one to start a discussion. Pull requests are always appreciated!
 
-The main star: **Dominik Míček** https://github.com/Ballonek <br>
-Original Maintainer: **Ondřej Mikulčík** https://github.com/omikulcik <br>
-Active Maintainer: **Filip Ónodi** https://github.com/fonodi <br>
-Project owner: **Ondřej Janošík** <br>
-
-Wanna be here? Open an issue (and solve it), PR or share improvement idea and you will become a listed contributor.
-
-## 💬 Community
-
-Join our [Discord server](https://discord.gg/hZRCcfWq) to discuss new features, implementation challenges or anything related to this plugin.
-
-## 🚀 Created with passion by [Notum Technologies](https://notum.cz/en)
-
-- Official STRAPI partner and Czech based custom development agency.
-- We're passionate about sharing our expertise with the open source community, which is why we developed this plugin. 🖤
-
-## 🎯 [How can Notum help you with your STRAPI project?](https://notum.cz/en/strapi/)
-
-✔️ We offer valuable assistance in developing custom STRAPI, web, and mobile apps to fulfill your requirements and goals.. <br>
-✔️ With a track record of 100+ projects, our open communication and exceptional project management skills provide us with the necessary tools to get your project across the finish line.<br>
-📅 To initiate a discussion about your Strapi project, feel free to reach out to us via email at sales@notum.cz. We're here to assist you!
+If you'd like to directly contribute, check our [Contributions document](https://github.com/notum-cz/strapi-plugin-location?tab=contributing-ov-file).
