@@ -38,7 +38,7 @@
       />
     </a>
     <a
-      href="https://github.com/notum-cz/strapi-plugin-location/blob/new-readme/LICENSE"
+      href="https://github.com/notum-cz/strapi-plugin-location/blob/main/LICENSE"
     >
       <img
         src="https://img.shields.io/github/license/notum-cz/strapi-plugin-location"
