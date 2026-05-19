@@ -70,7 +70,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.3",
-    "styled-components": "^6.4.0",
+    "styled-components": "^6.4.2",
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
@@ -79,7 +79,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.3",
-    "styled-components": "^6.4.0"
+    "styled-components": "^6.4.2"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
