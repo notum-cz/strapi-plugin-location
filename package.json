@@ -14,13 +14,16 @@
     "type": "git",
     "url": "git+https://github.com/notum-cz/strapi-plugin-location.git"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://github.com/notum-cz/strapi-plugin-location#readme",
+  "license": "MIT",
   "author": {
-    "name": "Dominik Míček <dominik.micek@notum.cz> (https://notum.cz/en/strapi)"
+    "name": "Dominik Míček",
+    "email": "dominik.micek@notum.cz",
+    "url": "https://www.notum.tech/notum-and-strapi"
   },
   "maintainers": [
-    "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.cz/en/strapi)",
-    "Dominik Juriga <dominik.juriga@notum.cz> (https://notum.cz/en/strapi)"
+    "Notum Technologies s.r.o. <sales@notum.cz> (https://www.notum.tech/notum-and-strapi)",
+    "Dominik Juriga <dominik.juriga@notum.cz> (https://www.notum.tech/notum-and-strapi)"
   ],
   "type": "commonjs",
   "exports": {
@@ -52,37 +55,34 @@
     "test:ts:back": "run -T tsc -p server/tsconfig.json"
   },
   "dependencies": {
-    "@strapi/design-system": "2.2.0",
-    "@strapi/icons": "2.2.0",
     "leaflet": "1.9.4",
     "lodash": "4.18.1",
     "react-leaflet": "4.2.1"
   },
   "devDependencies": {
+    "@strapi/design-system": "2.2.0",
+    "@strapi/icons": "2.2.0",
     "@strapi/sdk-plugin": "6.1.0",
     "@strapi/strapi": "5.46.0",
     "@strapi/typescript-utils": "5.46.0",
     "@types/leaflet": "1.9.21",
     "@types/lodash": "4.17.24",
-    "@types/react": "19.2.6",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
     "prettier": "3.8.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.30.3",
-    "styled-components": "6.4.1",
     "typescript": "6.0.3"
   },
   "peerDependencies": {
-    "@strapi/sdk-plugin": "6.1.1",
-    "@strapi/strapi": "5.46.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-router-dom": "6.30.3",
-    "styled-components": "6.4.1"
+    "@strapi/design-system": "^2.2.0",
+    "@strapi/icons": "^2.2.0",
+    "@strapi/strapi": "^5.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "engines": {
-    "node": ">=18.0.0 <=22.x.x",
+    "node": ">=18.0.0 <=24.x.x",
     "npm": ">=6.0.0"
   },
   "strapi": {
