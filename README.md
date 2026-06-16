@@ -69,7 +69,7 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-  - [⚠️ Caution](#️-caution)
+  - [Prerequisites](#prerequisites)
   - [About the Project](#about-the-project)
     - [Features](#features)
     - [Screenshots](#screenshots)
@@ -86,7 +86,7 @@
       - [Contributors](#contributors)
     - [Contributing](#contributing)
 
-## ⚠️ Caution
+## Prerequisites
 
 This plugin requires a PostgreSQL database with the PostGIS extension enabled (can be used on that database plugin will enable it for you if it can). Make sure you have a compatible database set up before using this plugin. For development I used postgis docker image from here: https://registry.hub.docker.com/r/postgis/postgis/
 
@@ -124,7 +124,9 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 
 ## Getting Started
 
-If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin.
+| 🚨 Important |
+| :--- |
+| If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin. |
 
 <!-- Installation -->
 
