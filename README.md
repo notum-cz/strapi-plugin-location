@@ -124,9 +124,9 @@ This plugin requires a PostgreSQL database with the PostGIS extension enabled (c
 
 ## Getting Started
 
-| 🚨 Important |
-| :--- |
-| If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin. |
+> 🚨 **Important**
+>
+> If you need to use this plugin for Strapi V4, please install the 1.x releases of the plugin.
 
 <!-- Installation -->
 
