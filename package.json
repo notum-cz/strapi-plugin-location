@@ -1,95 +1,92 @@
 {
-  "name": "@notum-cz/strapi-plugin-location",
-  "version": "2.0.0",
-  "description": "Strapi PostGIS Location Input Plugin",
-  "keywords": [
-    "strapi",
-    "plugin",
-    "location",
-    "leaflet",
-    "postgis"
-  ],
-  "bugs": {
-    "url": "https://github.com/notum-cz/strapi-plugin-location/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/notum-cz/strapi-plugin-location.git"
-  },
-  "license": "MIT",
-  "author": "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.tech)",
-  "maintainers": [
-    "Notum Technologies s.r.o. <sales@notum.cz>",
-    "Filip Ónodi <filip.onodi@notum.cz>"
-  ],
-  "homepage": "https://github.com/notum-cz/strapi-plugin-location#readme",
-  "type": "commonjs",
-  "exports": {
-    "./package.json": "./package.json",
-    "./strapi-admin": {
-      "types": "./dist/admin/src/index.d.ts",
-      "source": "./admin/src/index.ts",
-      "import": "./dist/admin/index.mjs",
-      "require": "./dist/admin/index.js",
-      "default": "./dist/admin/index.js"
-    },
-    "./strapi-server": {
-      "types": "./dist/server/src/index.d.ts",
-      "source": "./server/src/index.ts",
-      "import": "./dist/server/index.mjs",
-      "require": "./dist/server/index.js",
-      "default": "./dist/server/index.js"
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "strapi-plugin build",
-    "watch": "strapi-plugin watch",
-    "watch:link": "strapi-plugin watch:link",
-    "verify": "strapi-plugin verify",
-    "test:ts:front": "run -T tsc -p admin/tsconfig.json",
-    "test:ts:back": "run -T tsc -p server/tsconfig.json"
-  },
-  "dependencies": {
-    "@strapi/design-system": "^2.2.0",
-    "@strapi/icons": "^2.2.0",
-    "leaflet": "^1.9.4",
-    "lodash": "^4.18.1",
-    "react-leaflet": "4.2.1"
-  },
-  "devDependencies": {
-    "@strapi/sdk-plugin": "^6.0.1",
-    "@strapi/strapi": "^5.42.0",
-    "@strapi/typescript-utils": "^5.42.0",
-    "@types/leaflet": "^1.9.21",
-    "@types/lodash": "^4.17.24",
-    "@types/react": "^19.2.6",
-    "@types/react-dom": "^19.2.3",
-    "prettier": "^3.8.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.3",
-    "styled-components": "^6.4.0",
-    "typescript": "^6.0.3"
-  },
-  "peerDependencies": {
-    "@strapi/sdk-plugin": "^6.0.1",
-    "@strapi/strapi": "^5.42.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.3",
-    "styled-components": "^6.4.0"
-  },
-  "engines": {
-    "node": ">=18.0.0 <=22.x.x",
-    "npm": ">=6.0.0"
-  },
-  "strapi": {
-    "kind": "plugin",
-    "displayName": "Location",
-    "name": "location-plugin",
-    "description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location."
-  }
+	"name": "@notum-cz/strapi-plugin-location",
+	"version": "2.1.0",
+	"description": "Strapi PostGIS Location Input Plugin. This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location.",
+	"keywords": [
+		"strapi",
+		"plugin",
+		"location",
+		"leaflet",
+		"postgis"
+	],
+	"bugs": {
+		"url": "https://github.com/notum-cz/strapi-plugin-location/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/notum-cz/strapi-plugin-location.git"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/notum-cz/strapi-plugin-location#readme",
+	"author": "Notum Technologies s.r.o. <sales@notum.cz> (https://notum.tech)",
+	"maintainers": [
+		"Notum Technologies s.r.o. <sales@notum.cz> (https://www.notum.tech/notum-and-strapi)",
+		"Filip Ónodi <filip.onodi@notum.cz> (https://www.notum.tech/notum-and-strapi)"
+	],
+	"type": "commonjs",
+	"exports": {
+		"./package.json": "./package.json",
+		"./strapi-admin": {
+			"types": "./dist/admin/src/index.d.ts",
+			"source": "./admin/src/index.ts",
+			"import": "./dist/admin/index.mjs",
+			"require": "./dist/admin/index.js",
+			"default": "./dist/admin/index.js"
+		},
+		"./strapi-server": {
+			"types": "./dist/server/src/index.d.ts",
+			"source": "./server/src/index.ts",
+			"import": "./dist/server/index.mjs",
+			"require": "./dist/server/index.js",
+			"default": "./dist/server/index.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "strapi-plugin build",
+		"watch": "strapi-plugin watch",
+		"watch:link": "strapi-plugin watch:link",
+		"verify": "strapi-plugin verify",
+		"test:ts:front": "run -T tsc -p admin/tsconfig.json",
+		"test:ts:back": "run -T tsc -p server/tsconfig.json"
+	},
+	"dependencies": {
+		"leaflet": "1.9.4",
+		"lodash": "4.18.1",
+		"react-leaflet": "4.2.1"
+	},
+	"devDependencies": {
+		"@strapi/design-system": "2.2.0",
+		"@strapi/icons": "2.2.0",
+		"@strapi/sdk-plugin": "6.1.0",
+		"@strapi/strapi": "5.46.0",
+		"@strapi/typescript-utils": "5.46.0",
+		"@types/leaflet": "1.9.21",
+		"@types/lodash": "4.17.24",
+		"@types/react": "^18.3.0",
+		"@types/react-dom": "^18.3.0",
+		"prettier": "3.8.3",
+		"react": "18.3.1",
+		"react-dom": "18.3.1",
+		"typescript": "6.0.3"
+	},
+	"peerDependencies": {
+		"@strapi/design-system": "^2.2.0",
+		"@strapi/icons": "^2.2.0",
+		"@strapi/strapi": "^5.0.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0"
+	},
+	"engines": {
+		"node": ">=18.0.0 <=24.x.x",
+		"npm": ">=6.0.0"
+	},
+	"strapi": {
+		"kind": "plugin",
+		"displayName": "Location",
+		"name": "location-plugin",
+		"description": "This plugin allows users to create location inputs and store latitude and longitude values as geometry types in a PostGIS database. It also provides functionality to filter items based on their location."
+	}
 }
